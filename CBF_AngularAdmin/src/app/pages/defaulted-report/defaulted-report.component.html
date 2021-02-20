@@ -1,0 +1,252 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <!-- <div class="fade aside aside-sm" id="content-aside">
+        <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+          <div class="navbar">
+            <span class="text-md">Defaulted Report</span>
+            <div class="dropdown dropright">
+              <div class="dropdown-menu w-lg">
+                <div class="p-3">
+                  <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" id="newField" placeholder="Group name"
+                      required="" />
+                    <span class="input-group-append"><button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                        type="button" id="newBtn">
+                        <i class="i-con i-con-ok"></i></button></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="sidenav mt-2">
+              <nav class="nav-active-text-primary" data-nav="">
+                <ul class="nav">
+                  <li *ngFor="let menu of menus">
+                    <a data-pjax-state=""><span class="nav-text" (click)="selectedWeek(menu)">{{
+                        menu?.pool_Name
+                      }}</span>
+                      <span class="nav-badge"><b class="badge badge-sm badge-pill bg-secondary">{{
+                          menu?.theCount
+                        }}</b></span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div> -->
+        <div class="d-flex flex" id="content-body">
+            <div class="d-flex flex-column flex" id="user-list">
+                <div class="p-3">
+                    <div class="toolbar">
+                        <h5 class="Primary">Defaulted Report (Transferred to owner)</h5>
+                    </div>
+                </div>
+                <!-- <div *ngIf="show" class="d-block pl-3 pr-3">
+                    <div class="">
+                        <div class="scroll-y">
+                            <div class="card">
+                                <div class="scroll-y">
+                                    <div class="p-3">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="nav-active-border b-primary bottom">
+                                                    <ul class="nav" id="myTab" role="tablist">
+                                                        <li class="nav-item"
+                                                            *ngFor="let obj of Weeks; let index = index">
+                                                            <a class="nav-link" id="home-tab" data-toggle="tab"
+                                                                (click)="getNFLDataByWeek(obj)" role="tab"
+                                                                aria-controls="home" aria-selected="false">Week
+                                                                {{ obj }}</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="d-flex flex px-3">
+                    <div class="d-flex flex-column flex">
+                        <div class="scroll-y">
+                            <div class="row pb-3">
+                                <!-- <div class="col-sm-2">
+                                    <h5 class="Primary" *ngIf="weekNumber !== 'Week 0'">
+                                        {{ weekNumber }}
+                                    </h5>
+                                </div> -->
+                                <div class="col-sm-2 align-right">
+                                    <label style="position: relative; top:4px;">Filter By :</label>
+                                </div>
+                                <div class="col-sm-3 align-right">
+                                    <select class="form-control form-control-sm "
+                                        (change)="EntryFilterChange($event.target.value)">
+                                        <option>None</option>
+                                        <option>Ticket</option>
+                                        <option>Pool Name</option>
+                                        <option>First Name</option>
+                                        <option>Last Name</option>
+                                        <option>Email</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="flex">
+                                        <div [style.display]="showTicketTextbox ? 'block' : 'none'">
+                                            <div class="input-group">
+                                                <input type="text" #ticket class="form-control form-control-sm search"
+                                                    placeholder="Search by ticket"> <span
+                                                    class="input-group-append"><button
+                                                        class="btn btn-white no-shadow btn-sm i-con-h-a"
+                                                        type="button"><i (click)="filterByTicket(ticket.value)"
+                                                            class="i-con i-con-search text-muted"></i></button></span>
+                                            </div>
+                                        </div>
+                                        <div [style.display]="showPoolTextbox ? 'block' : 'none'">
+                                            <div class="input-group">
+                                                <input class="form-control form-control-sm search"
+                                                    placeholder="Search by pool name" type="text" #pool />
+                                                <button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                                                    type="button"><i (click)="filterByPool(pool.value)"
+                                                        class="i-con i-con-search text-muted"></i></button>
+                                            </div>
+                                        </div>
+                                        <div [style.display]="showFirstTextbox ? 'block' : 'none'">
+                                            <div class="input-group">
+                                                <input class="form-control form-control-sm search"
+                                                    placeholder="Search by first name" type="text" #first />
+                                                <button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                                                    type="button"><i (click)="filterByFirst(first.value)"
+                                                        class="i-con i-con-search text-muted"></i></button>
+                                            </div>
+                                        </div>
+                                        <div [style.display]="showLastTextbox ? 'block' : 'none'">
+                                            <div class="input-group">
+                                                <input class="form-control form-control-sm search"
+                                                    placeholder="Search by last name" type="text" #last />
+                                                <button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                                                    type="button"><i (click)="filterByLast(last.value)"
+                                                        class="i-con i-con-search text-muted"></i></button>
+                                            </div>
+                                        </div>
+                                        <div [style.display]="showEmailTextbox ? 'block' : 'none'">
+                                            <div class="input-group">
+                                                <input class="form-control form-control-sm search"
+                                                placeholder="Search by email" type="text" #email />
+                                            <button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                                                type="button"><i (click)="filterByEmail(email.value)"
+                                                    class="i-con i-con-search text-muted"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pb-3">
+                                    <a style="float: right;" class="btn btn-sm btn-warning"
+                                        (click)="exportTOCSV()">Export to CSV</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="scroll-y">
+                                    <div class="p-3">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-theme v-middle">
+                                                    <thead class="text-muted">
+                                                        <tr>
+                                                            <th>
+                                                                <div (click)="sortDefaultedReportBy('entryName')"
+                                                                    [ngClass]="
+                                      filterData.shortByName == 'entryName'
+                                        ? filterData.isAscending
+                                          ? 'asc'
+                                          : 'desc'
+                                        : ''
+                                    " class="th-inner sortable both">
+                                                                    Ticket
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div (click)="sortDefaultedReportBy('pool_Name')"
+                                                                    [ngClass]="
+                                      filterData.shortByName == 'pool_Name'
+                                        ? filterData.isAscending
+                                          ? 'asc'
+                                          : 'desc'
+                                        : ''
+                                    " class="th-inner sortable both">
+                                                                    Pool Name
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div (click)="sortDefaultedReportBy('first_Name')"
+                                                                    [ngClass]="
+                                      filterData.shortByName == 'first_Name'
+                                        ? filterData.isAscending
+                                          ? 'asc'
+                                          : 'desc'
+                                        : ''
+                                    " class="th-inner sortable both">
+                                                                    First Name
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div (click)="sortDefaultedReportBy('last_Name')"
+                                                                    [ngClass]="
+                                      filterData.shortByName == 'last_Name'
+                                        ? filterData.isAscending
+                                          ? 'asc'
+                                          : 'desc'
+                                        : ''
+                                    " class="th-inner sortable both">
+                                                                    Last Name
+                                                                </div>
+                                                            </th>
+                                                            <th>
+                                                                <div (click)="sortDefaultedReportBy('email_Address')"
+                                                                    [ngClass]="
+                                      filterData.shortByName == 'email_Address'
+                                        ? filterData.isAscending
+                                          ? 'asc'
+                                          : 'desc'
+                                        : ''
+                                    " class="th-inner sortable both">
+                                                                    Email Address
+                                                                </div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="v-middle" data-id="7" *ngFor="let obj of Reports">
+                                                            <td>{{ obj.entryName }}</td>
+                                                            <td>
+                                                                {{ obj.pool_Name }}
+                                                            </td>
+                                                            <td>
+                                                                {{ obj.first_Name }}
+                                                            </td>
+                                                            <td>
+                                                                {{ obj.last_Name }}
+                                                            </td>
+                                                            <td>
+                                                                {{ obj.email_Address }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

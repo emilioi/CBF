@@ -1,0 +1,52 @@
+<div id="content" class="flex">
+        <div _ngcontent-erp-c5="" class="p-3 b-b">
+            <div _ngcontent-erp-c5="" class="toolbar"><a _ngcontent-erp-c5="" class="btn btn-sm btn-white i-con-h-a"
+                    data-pjax-state="" title="Back" [routerLink]="['/week-list']"><i _ngcontent-erp-c5=""
+                        class="i-con i-con-arrow-left text-muted"><i _ngcontent-erp-c5=""></i></i></a><button
+                    _ngcontent-erp-c5="" class="btn btn-sm btn-white d-md-none" data-modal="" data-target="#content-aside"
+                    data-toggle="modal"><i _ngcontent-erp-c5="" class="i-con i-con-nav text-muted"></i></button></div>
+        </div>
+        <div class="" id="page-container">
+    
+            <div class="p-3">
+    
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form novalidate="" [formGroup]="poolFrm">
+                            <div class="card">
+                                <div class="card-header"><strong>Edit Week</strong></div>
+                                <div class="card-body">
+                                    <div class="form-group"><label for="inputState" class="text-muted d-block">Pool
+                                            ID</label>
+                                        <input type="text" disabled formControlName="pool_ID" class="form-control"
+                                            required="">
+                                    </div>
+                                    <div class="form-group"><label for="inputState" class="text-muted d-block">Pool
+                                            Name</label>
+                                        <input type="text" disabled formControlName="pool_Name" class="form-control" required="">
+                                    </div>
+                                    <div class="form-group"><label>Week Number</label>
+                                        <select class="custom-select"  formControlName="week_Number">
+                                            <option selected="selected" value="{{week}}" *ngFor="let week of weekNumbers">
+                                                {{week}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group"><label>Cut Off Date (dd/mm/yyyy)</label><input type="text" 
+                                            class="form-control" id="datepicker" required="" formControlName="cut_Off_Date">
+                                        </div>
+                                    <div class="form-group"><label>Cut Off Flag</label><select class="custom-select"
+                                            formControlName="start">
+                                            <option selected="selected" value="true">True</option>
+                                            <option value="false">False</option>
+                                        </select></div>
+                                    <div class="text-right"><button (click)="saveUpdatePoolWeek()" type="submit"
+                                            class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

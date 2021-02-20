@@ -1,0 +1,34 @@
+.btn-top-toolbar{
+    width: 117px;
+   height: 33px;
+   color: #FFFFFF;
+   background: #077AE1 0% 0% no-repeat padding-box;
+   border: 1px solid #077AE1;
+   border-radius: 4px;
+   opacity: 1;
+   text-align: center;
+   font: Bold 12px/14px Google Sans;
+   letter-spacing: 0;
+   }
+   .btn-top-toolbar-outline
+   {
+       width: 117px;
+       height: 33px;
+       background: #F4F4F4 0% 0% no-repeat padding-box;
+       border: 1px solid #077AE1;
+       border-radius: 4px;
+       opacity: 1;
+       text-align: center;
+   font: Bold 12px/14px Google Sans;
+   letter-spacing: 0;
+   color: #077AE1;
+   opacity: 1;
+   }
+   @media (max-width: 360px)
+   {
+       .btn-top-toolbar-outline,.btn-top-toolbar{
+           width: 100%;
+           font-size:8px; 
+            
+       }
+   }

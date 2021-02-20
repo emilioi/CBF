@@ -1,0 +1,68 @@
+<div id="aside" class="page-sidenav no-shrink nav-expand animate fadeInLeft fade bg-white sticky" aria-hidden="true"
+  data-class="bg-white">
+  <div class="sidenav h-100 modal-dialog bg-white box-shadow">
+    <!-- sidenav top -->
+    <!-- Flex nav content -->
+    <div class="flex">
+      <div class="nav-border b-primary" data-nav="">
+        <div class="row pt-2 pb-2 mobile">
+          <div class="float-left w-33"><img class="header-logo-lg" src="../../../assets/CBFLogoYellow.svg"></div>
+          <div class="float-left w-33">
+            <h3 class="text-center"><span>Menu</span></h3>
+          </div>
+          <div class="float-left w-33 mobile"> <a class="float-right d-lg-none i-con-h-a px-1" data-toggle="modal"
+              data-target="#aside" data-pjax-state="">
+              <i class="mr-2 i-con i-con-close close-icon"></i>
+            </a>
+          </div>
+        </div>
+        <div class="flex pt-2 pb-2">
+          <div class="float-left w-33"></div>
+          <br>
+          <div class="w-33 center">
+            <h3 class="text-center"><span>Menu</span></h3>
+          </div>
+          <div class="float-left w-33 ">
+          </div>
+        </div>
+        <ul class="nav bg">
+          <li class="active">
+            <a [routerLink]="['/club-house']" class="i-con-h-a" data-toggle="modal">
+              <span class="nav-text" data-toggle="modal" data-pjax-state="" data-target="#aside">Club House</span>
+            </a>
+            <ul style="display: none" class="nav-sub " *ngIf='clubs != null && clubs.length > 0'>
+              <li *ngFor="let obj of clubs" class="sub-menu-item">
+                <a href='/ticket/{{obj.pool_ID}}' class="i-con-h-a">
+                  <span class="nav-text">{{obj.pool_Name}}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- <li class="">
+            <a [routerLink]="['/ticket']" class="i-con-h-a">
+              <span class="nav-text" data-toggle="modal" data-pjax-state="" data-target="#aside">Tickets</span>
+            </a>
+          </li> -->
+
+          <li class="">
+            <a [routerLink]="['/profile']" class="i-con-h-a">
+              <span class="nav-text" data-toggle="modal" data-pjax-state="" data-target="#aside">Profile</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/rule']" class="i-con-h-a">
+              <span class="nav-text" data-toggle="modal" data-pjax-state="" data-target="#aside">Rules</span>
+            </a>
+          </li>
+          <li>
+            <a href="http://support.clubbigfun.com/" target="_blank" class="i-con-h-a">
+              <span class="nav-text" data-toggle="modal" data-pjax-state="" data-target="#aside">Support</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- sidenav bottom -->
+  </div>
+</div>

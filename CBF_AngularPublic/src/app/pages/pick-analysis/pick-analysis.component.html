@@ -1,0 +1,228 @@
+<div class="col-sm-12 pt-3">
+    <div class="row pt-3 top-navigation-bar">
+        <div class="col-sm-12 ">
+            <a style="float:left;" (click)="BackToClubs()" class=" text-uppercase" title="Back to Club">
+                <span class="back-icon">
+                    <i style="float: left;" class="mr-2 i-con i-con-left left"></i>BACK</span>
+            </a>
+            <span class="center">{{ClubDetail?.pool_Name}}</span>
+        </div>
+    </div>
+    <app-report-navbar [PoolID]="CurrentPoolID" PageName="pick-analysis"></app-report-navbar>
+
+    <div class="row pb-3">
+        <div class="col-sm-12 col-md-12 col-lg-6 pb-1"><button style="text-align: left;"
+                class="btn btn-block btn-white eliminated-heading" (click)="totalEliminated(ClubDetail?.pool_ID)">TOTAL
+                ENTRIES
+                ELIMINATED :
+                &nbsp;&nbsp;
+                <span class="text-danger">{{PickAnalysisCount?.totalEliminatedCount}}</span>
+                <i style="float: right;top: 4px;" class="mr-2 i-con i-con-right right"></i></button></div>
+
+        <div class="col-sm-12 col-md-12 col-lg-6 pb-1"><button style="text-align: left;"
+                class="btn btn-block btn-white  eliminated-heading" (click)="totalAlive(ClubDetail?.pool_ID)">TOTAL
+                STILL
+                ALIVE :
+                &nbsp;&nbsp;
+                <span class="text-success">{{PickAnalysisCount?.totalAliveCount}} </span>
+                <i style="float: right;top: 4px;" class="mr-2 i-con i-con-right right"></i></button></div>
+
+    </div>
+    <div class="p-1">
+        <div class="mb-5">
+            <div class="table-center">
+                <table *ngIf="IsNFL" style="min-width: 1550px !important"
+                    class="table table-theme table-row v-middle pick-analysis">
+                    <thead>
+                        <tr>
+                            <th>TEAM</th>
+                            <th>WEEK 1</th>
+                            <th>WEEK 2</th>
+                            <th>WEEK 3</th>
+                            <th>WEEK 4</th>
+                            <th>WEEK 5</th>
+                            <th>WEEK 6</th>
+                            <th>WEEK 7</th>
+                            <th>WEEK 8</th>
+                            <th>WEEK 9</th>
+                            <th>WEEK 10</th>
+                            <th>WEEK 11</th>
+                            <th>WEEK 12</th>
+                            <th>WEEK 13</th>
+                            <th>WEEK 14</th>
+                            <th>WEEK 15</th>
+                            <th>WEEK 16</th>
+                            <th>WEEK 17</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="v-middle h-center {{obj.abbreviation}}" *ngFor="let obj of PickAnalysisReport">
+                            <td
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#FFB111' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm"> {{obj.abbreviation}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,1)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week1}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,2)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week2}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,3)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week3}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,4)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week4}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,5)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week5}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,6)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week6}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,7)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week7}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,8)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week8}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,9)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week9}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,10)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week10}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,11)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week11}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,12)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week12}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,13)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week13}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,14)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week14}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,15)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week15}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,16)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week16}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,17)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week17}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table *ngIf="IsNHL" style="min-width: 1550px !important"
+                    class="table table-theme table-row v-middle pick-analysis">
+                    <thead>
+                        <tr>
+                            <th>TEAM</th>
+                            <th>WEEK 1</th>
+                            <th>WEEK 2</th>
+                            <th>WEEK 3</th>
+                            <th>WEEK 4</th>
+                            <th>WEEK 5</th>
+                            <th>WEEK 6</th>
+                            <th>WEEK 7</th>
+                            <th>WEEK 8</th>
+                            <th>WEEK 9</th>
+                            <th>WEEK 10</th>
+                            <th>WEEK 11</th>
+                            <th>WEEK 12</th>
+                            <th>WEEK 13</th>
+                            <th>WEEK 14</th>
+                            <th>WEEK 15</th>
+                            <th>WEEK 16</th>
+                            <th>WEEK 17</th>
+                            <th>WEEK 18</th>
+                            <th>WEEK 19</th>
+                            <th>WEEK 20</th>
+                            <th>WEEK 21</th>
+                            <th>WEEK 22</th>
+                            <th>WEEK 23</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="v-middle h-center {{obj.abbreviation}}" *ngFor="let obj of PickAnalysisReport">
+                            <td
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#FFB111' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm"> {{obj.abbreviation}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,1)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week1}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,2)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week2}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,3)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week3}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,4)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week4}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,5)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week5}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,6)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week6}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,7)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week7}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,8)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week8}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,9)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week9}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,10)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week10}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,11)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week11}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,12)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week12}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,13)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week13}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,14)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week14}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,15)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week15}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,16)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week16}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,17)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week17}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,18)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week18}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,19)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week19}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,20)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week20}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,21)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week21}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,22)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week22}}</span></td>
+                            <td [ngClass]="getClassFlag(obj,23)"
+                                [style.color]="obj.abbreviation == 'Defaulted' ? '#f60' : '#000' && obj.abbreviation == 'Eliminated' ? '#FF0808' : '#000'">
+                                <span class="item-amount text-sm">{{obj.week23}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

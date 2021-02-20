@@ -1,0 +1,133 @@
+<div id="content" class="flex">
+  <div class="page-container" id="page-container">
+    <div class="page-title padding pb-0">
+      <h2 class="text-md mb-0">Dashboard</h2>
+    </div>
+    <div class="padding">
+      <div class="row row-sm">
+        <div class="col-md-12 col-lg-8 col-xl-9">
+          <div class="block px-4 py-3">
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-users b-2x text-primary"><i></i></i></span></div>
+                  <div class="mx-3"><a [routerLink]="['/dashoard']" class="d-block ajax"><strong>{{counts?.poolCount}}</strong></a> <small
+                      class="text-muted">Pools</small></div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-users b-2x text-success"><i></i></i></span></div>
+                  <div class="mx-3"><a [routerLink]="['/dashoard']" class="d-block ajax"><strong>{{counts?.memberCount}}</strong></a> <small
+                      class="text-muted">Total Members</small></div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-users b-2x text-warning"><i></i></i></span></div>
+                  <div class="mx-3"><a [routerLink]="['/dashoard']" class="d-block ajax"><strong>{{counts?.mailingCount}}</strong></a>
+                    <small class="text-muted">Mailing List </small></div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-users b-2x text-danger"><i></i></i></span></div>
+                  <div class="mx-3"><a [routerLink]="['/dashoard']" class="d-block ajax"><strong>{{counts?.allAdminCount}}</strong></a> <small
+                      class="text-muted">Admins</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card">
+            <div class="row row-sm">
+              <div class="col-md-12">
+                <div class="p-3">
+                  <h2 class="text-md mb-0">Upcoming Matches</h2>
+                </div>
+              </div>
+            </div>
+            <div class="row row-sm">
+              <div class="col-md-12">
+                <table id="datatable" class="table table-theme table-row v-middle dataTable no-footer" role="grid"
+                  aria-describedby="datatable_info">
+                  <thead>
+                    <tr role="row">
+                      <th style="width: 15%;"><span class="text-muted">Date</span>
+                      </th>
+                      <th style="width: 55%;"><span class="text-muted">Match Details</span></th>
+                      <th style="width: 30%;"><span class="text-muted">Time</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="odd" data-id="1" role="row">
+                      <td tabindex="0" rowspan="1" colspan="1" style="width: 15%;"><span
+                          class="text-sm">01/02/2018</span></td>
+                      <td class="flex" style="width: 55%;">
+                        <div class="item-except text-sm">
+                          ENGLAND vs SOUTH AFRICA, Match 1
+                          Kennington Oval, London
+                          England won by 104 runs </div>
+                      </td>
+                      <td style="width: 30%;"><span class="text-sm">3:00 PM
+                          <br>
+                          09:30 AM GMT / 10:30 AM LOCAL</span>
+                      </td>
+                    </tr>
+                    <tr class="odd" data-id="1" role="row">
+                      <td tabindex="0" rowspan="1" colspan="1" style="width: 15%;"><span
+                          class="text-sm">01/02/2018</span></td>
+                      <td class="flex" style="width: 55%;">
+                        <div class="item-except text-sm">
+                          ENGLAND vs SOUTH AFRICA, Match 1
+                          Kennington Oval, London
+                          England won by 104 runs </div>
+                      </td>
+                      <td class="flex" style="width: 30%;"><span class="text-sm">3:00 PM
+                          <br>
+                          09:30 AM GMT / 10:30 AM LOCAL</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="col-md-12 col-lg-4 col-xl-3">
+          <div class="row row-sm">
+            <div class="col-lg-12 col-sm-6">
+              <div class="card">
+                <div class="p-3">
+                  <div class="d-flex i-con-h-a">
+                    <div class="pb-3">
+                      <h2 class="text-md mb-0">Latest Logins</h2>
+                    </div>
+                  </div>
+                  <div class="scroll-y">
+                    <div class="card">
+                      <div class="list list-row animate fadeIn">
+                        <div class="pb-2" data-id="12" *ngFor="let obj of latestLogins">
+                          <div class="flex bt"><a class="item-author">{{obj?.login_Id}}</a>
+                            <div class="item-mail text-muted h-1x">{{obj?.email_Address}}</div>
+                            <div><span class="text-sm">{{obj?.last_Login | date }}</span>
+                              <!-- <span style="float: right;" class="badge bg-success-lt text-uppercase">Success</span> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

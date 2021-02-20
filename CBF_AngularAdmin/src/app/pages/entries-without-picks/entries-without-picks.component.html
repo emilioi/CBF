@@ -1,0 +1,275 @@
+<div id="content" class="flex">
+  <div class="d-flex flex h-100">
+    <div class="fade aside aside-sm" id="content-aside">
+      <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+        <div class="navbar">
+          <span class="text-md">Active Entries Without Pick</span>
+          <div class="dropdown dropright">
+            <div class="dropdown-menu w-lg">
+              <div class="p-3">
+                <div class="input-group">
+                  <input type="text" class="form-control form-control-sm" id="newField" placeholder="Group name"
+                    required="" />
+                  <span class="input-group-append"><button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                      type="button" id="newBtn">
+                      <i class="i-con i-con-ok"></i></button></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <div class="sidenav mt-2">
+            <nav class="nav-active-text-primary" data-nav="">
+              <ul class="nav">
+                <li *ngFor="let menu of menus">
+                  <a data-pjax-state=""><span class="nav-text" (click)="selectedWeek(menu)">{{
+                      menu?.pool_Name
+                    }}</span>
+                    <span class="nav-badge"><b class="badge badge-sm badge-pill bg-secondary">{{
+                        menu?.theCount
+                      }}</b></span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex" id="content-body">
+      <div class="d-flex flex-column flex" id="user-list">
+        <div class="p-3">
+          <div class="toolbar">
+            <h5 class="Primary">{{ pooName }}</h5>
+          </div>
+        </div>
+        <div *ngIf="show" class="d-block pl-3 pr-3">
+          <div class="">
+            <div class="scroll-y">
+              <div class="card">
+                <div class="scroll-y">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="nav-active-border b-primary bottom">
+                          <ul class="nav" id="myTab" role="tablist">
+                            <li class="nav-item" *ngFor="let obj of Weeks; let index = index">
+                              <a class="nav-link" id="home-tab" data-toggle="tab" (click)="getNFLDataByWeek(obj)"
+                                role="tab" aria-controls="home" aria-selected="false">Week {{ obj }}</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex px-3">
+          <div class="d-flex flex-column flex">
+            <div class="scroll-y">
+              <div class="row">
+                <div class="col-sm-2">
+                  <h5 class="Primary" *ngIf="weekNumber !== 'Week 0'">
+                    {{ weekNumber }}
+                  </h5>
+                </div>
+                <div class="col-sm-2 align-right" *ngIf="weekNumber">
+                  <label style="position: relative; top:4px;">Filter By :</label>
+                </div>
+                <div class="col-sm-2 align-right" *ngIf="weekNumber">
+                  <select *ngIf="weekNumber" class="form-control form-control-sm "
+                    (change)="EntryFilterChange($event.target.value)">
+                    <option>None</option>
+                    <option>Entry Name</option>
+                    <option>Login Id</option>
+                    <option>Name</option>
+                    <!-- <option>Defaults</option> 
+                    <option>Eliminate</option>-->
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <div [style.display]="showEntryNameTextbox ? 'block' : 'none'">
+                    <div class="input-group">
+                      <input class="form-control form-control-sm search" type="text" #EntryName />
+                      <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                          (click)="filterByEntry(EntryName.value)" class="i-con i-con-search text-muted"></i></button>
+                    </div>
+                  </div>
+
+                  <div [style.display]="showLoginIdTextbox ? 'block' : 'none'">
+                    <div class="input-group">
+                      <input class="form-control form-control-sm search" type="text" #Login />
+                      <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                          (click)="filterByLogin(Login.value)" class="i-con i-con-search text-muted"></i></button>
+                    </div>
+                  </div>
+
+                  <div [style.display]="showNameTextbox ? 'block' : 'none'">
+                    <div class="input-group">
+                      <input class="form-control form-control-sm search" type="text" #name />
+                      <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                          (click)="filterByName(name.value)" class="i-con i-con-search text-muted"></i></button>
+                    </div>
+                  </div>
+
+                  <div [style.display]="showDefaultsTextbox ? 'block' : 'none'">
+                    <div class="input-group">
+                      <!-- <input class="form-control form-control-sm search" type="text"
+                                  #default /> -->
+                      <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                          (click)="filterByDefault('Yes')" class="i-con i-con-search text-muted"></i></button>
+                    </div>
+                  </div>
+                  <div [style.display]="showEliminateTextbox ? 'block' : 'none'">
+                    <div class="input-group">
+                      <input class="form-control form-control-sm search" type="text" #default />
+                      <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                          (click)="filterByEliminate(default.value)" class="i-con i-con-search text-muted"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2 pb-3" *ngIf="weekNumber">
+                  <a style="float: right;" class="btn btn-sm btn-warning" (click)="exportTOCSV()">Export to CSV</a>
+                </div>
+              </div>
+              <div class="card">
+                <div class="scroll-y">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table class="table table-theme v-middle">
+                          <thead class="text-muted">
+                            <tr>
+                              <!-- <th>&nbsp;&nbsp;&nbsp; Action</th> -->
+                              <th>
+                                <div (click)="sortEntryListBy('pool_Id')" [ngClass]="
+                                    filterData.shortByName == 'pool_Id'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Pool Id
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortEntryListBy('pool_name')" [ngClass]="
+                                    filterData.shortByName == 'pool_name'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Pool Name
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortEntryListBy('Entry_Name')" [ngClass]="
+                                    filterData.shortByName == 'Entry_Name'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Entry Name
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortEntryListBy('Login_Id')" [ngClass]="
+                                    filterData.shortByName == 'Login_Id'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Login Id
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortEntryListBy('name')" [ngClass]="
+                                    filterData.shortByName == 'name'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Name
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortEntryListBy('defaults')" [ngClass]="
+                                    filterData.shortByName == 'defaults'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Defaults?
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortEntryListBy('Eliminated')" [ngClass]="
+                                    filterData.shortByName == 'eliminated'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Eliminated?
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="v-middle" data-id="7" *ngFor="let poolList of Entries">
+                              <!-- <td>
+                                                                        <p><button class="btn btn-sm btn-white i-con-h-a"
+                                                                            (click)="delete(poolList.entryID)" title="Delete"
+                                                                                id="btn-trash" data-original-title="Trash"><i
+                                                                                    class="i-con i-con-trash text-muted"><i></i></i></button>
+                                                                            &nbsp;&nbsp;
+                                                                            <button class="btn btn-sm btn-white i-con-h-a"
+                                                                            (click)="view(poolList.entryID, poolList.pool_Name)" title="View"
+                                                                                id="btn-trash" data-original-title="Trash"><i
+                                                                                    class="i-con i-con-edit text-muted"><i></i></i></button>
+                                                                        </p>
+                                                                    </td> -->
+                              <td>{{ poolList.poolID }}</td>
+                              <td>
+                                {{ poolList.pool_Name }}
+                              </td>
+                              <td>
+                                {{ poolList.entryName }}
+                              </td>
+                              <td>
+                                {{ poolList.login_ID }}
+                              </td>
+                              <td>
+                                {{ poolList.fullName }}
+                              </td>
+                              <td>
+                                {{ poolList.defaults }}
+                              </td>
+                              <td>
+                                {{ poolList.eliminated }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

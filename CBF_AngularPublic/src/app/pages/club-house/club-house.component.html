@@ -1,0 +1,360 @@
+<div class="block">
+    <div class="p-3">
+        <!--Custome Message-->
+        <div class="pb-3 desktop-alert" *ngFor="let obj of totalAlerts">
+            <div class="p-2" [ngClass]="obj?.alertColor == 'red' ? 'red-bar' : 'green-bar' "
+                [style.display]="obj.alert_Id ? 'block' : 'none'" style="display: none;">
+                <div class="row">
+                    <div class="col-2" style="border-right: 1px solid grey;"> <b>
+                            <p class="m-0 p-0 title">{{obj?.alert_Name}}</p>
+                        </b> </div>
+                    <div class="col-9">
+                        <p class="m-0 p-0"> {{obj?.alert_Description}} </p>
+                    </div>
+                    <div class="col-1">
+                        <span class="close-span">
+                        <a class="mobile-close-bar" title="close" (click)="closeMessage(obj)">X</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-3 mobile-alert" *ngFor="let obj of totalAlerts">
+            <div class="p-2" [ngClass]="obj?.alertColor == 'red' ? 'red-bar' : 'green-bar' "
+                [style.display]="obj.alert_Id ? 'block' : 'none'" style="display: none;">
+                <div class="row">
+                    <div class="col-12">  
+                        <a class="mobile-close-bar" title="close" (click)="closeMessage(obj)">X</a>
+                        <b>
+                            <p style="border-bottom: 1px solid grey; text-align: center;" class="m-0 pt-1 pb-2">{{obj?.alert_Name}}</p>
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p style="text-align: center;" class="m-0 pt-2 pb-2"> {{obj?.alert_Description}} </p>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h5 class="pl-3">My Clubs</h5>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let obj of clubs">
+                <div class="card border-card"    [ngClass]="{
+                    'nfl-pool': obj.sport_Type==1,
+                    'nhl-pool': obj.sport_Type==2
+                  }"> 
+                    <div class="">
+                        <h5 class="card-title"><span
+                                class="bg-primary p-1 text-center block d-block">{{obj?.pool_Name}}</span></h5>
+                        <p *ngIf="CheckCuttOff(obj)" style="min-height: 40px; font-size: 10px;" class="text-danger text-center d-block">
+                            ALL PICKS MUST BE IN
+                            BY&nbsp;
+                            {{obj?.cutOffDateString}}</p>
+                        <!-- <p *ngIf="!CheckCuttOff(obj)" style="min-height: 40px;" class="text-danger text-center d-block lock"><i
+                                class="mr-2 i-con i-con-lock"><i></i></i> This pool is closed.
+                        </p> -->
+                        <div class="loop" *ngFor="let week of obj.poolWeekLists">
+                            <h5 class="text-center d-block">Week {{week.weekNumber}}</h5>
+                            <div class="count-section min-h-60 d-block pt-3">
+                                <div class="entries-c ftlt">
+                                    <div class="text-center d-block"><span class="">ENTRIES</span></div>
+                                    <div class="text-center pt-2 d-block"><span>{{week.entriesCount || '0'}}</span>
+                                    </div>
+                                </div>
+                                <div class="pickmade-c ftlt">
+                                    <div class="text-center d-block"><span class="">PICK MADE</span></div>
+                                    <div class="text-center pt-2 d-block"><span>{{week.picksMadeCount || '0'}}</span>
+                                    </div>
+                                </div>
+                                <div class="nopick-c ftlt pb-3">
+                                    <div class="text-center d-block"><span class="">NO PICKS</span></div>
+                                    <div class="text-center pt-2 d-block"><span
+                                            class="badge-danger no-pick">{{week.noPicksCount || '0'}}</span></div>
+                                </div>
+                            </div>
+                            <div class="p-3 pb-0 most-picked-text">
+                                <p>3 MOST PICKED TEAMS THIS WEEK</p>
+                            </div>
+                            <div class="p-3 pt-0" *ngFor="let logo of week.mostPickedTeams">
+                                <div class="progress">
+                                    <img src="../../../assets/logos/{{logo.logoImageSrc}}"> &nbsp;
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        [ngStyle]="setMyStyles(week,logo)" aria-valuenow="25" aria-valuemin="0"
+                                        aria-valuemax="100">
+                                        <span>{{logo.pickCount}}</span></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="p-3 pt-0">
+                            <a (click)="enterPool(obj?.pool_ID)" class="btn center btn-primary btn-sm">Enter In Club</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6" *ngIf="clubs?.length <= 0">
+                You have not joined any clubs.
+            </div>
+
+        </div>
+    </div>
+    <div class="p-3">
+        <div class="row">
+            <h5 class="pl-3">Join a CLUB</h5>
+        </div>
+        <!-- <div class="row">
+            <p class="text-danger pl-3">CLUB ENTRIES CLOSE FRIDAY SEPTEMBER 7, 2019 AT 11:59PM</p>
+        </div> -->
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let obj of clubsAll">
+                <div class="card border-card" [ngClass]="{
+                    'nfl-pool': obj.sport_Type==1,
+                    'nhl-pool': obj.sport_Type==2
+                  }">
+                    <div class="">
+                        <h5 class="card-title"><span
+                                class="bg-primary p-1 text-center block d-block">{{obj?.pool_Name}}</span></h5>
+                        <p *ngIf="CheckCuttOff(obj)" style="min-height: 40px; font-size: 10px;" class="text-danger text-center d-block">
+                            ALL PICKS MUST BE IN
+                            BY&nbsp;
+                            {{obj?.cutOffDateString}}</p>
+                        <!-- <p *ngIf="!CheckCuttOff(obj)" class="text-danger text-center d-block lock"><i
+                                class="mr-2 i-con i-con-lock"><i></i></i> This pool is closed.
+                        </p> -->
+                        <div class="loop" *ngFor="let week of obj.poolWeekLists">
+                            <h5 class="text-center d-block">Week {{week.weekNumber}}</h5>
+                            <div class="count-section min-h-60 d-block pt-3">
+                                <div class="entries-c ftlt">
+                                    <div class="text-center d-block"><span class="">ENTRIES</span></div>
+                                    <div class="text-center pt-2 d-block"><span>{{week.entriesCount || '0'}}</span>
+                                    </div>
+                                </div>
+                                <div class="pickmade-c ftlt">
+                                    <div class="text-center d-block"><span class="">PICK MADE</span></div>
+                                    <div class="text-center pt-2 d-block"><span>{{week.picksMadeCount || '0'}}</span>
+                                    </div>
+                                </div>
+                                <div class="nopick-c ftlt pb-3">
+                                    <div class="text-center d-block"><span class="">NO PICKS</span></div>
+                                    <div class="text-center pt-2 d-block"><span
+                                            class="badge-danger no-pick">{{week.noPicksCount || '0'}}</span></div>
+                                </div>
+                            </div>
+                            <div class="p-3 pb-0 most-picked-text">
+                                <p>3 MOST PICKED TEAMS THIS WEEK</p>
+                            </div>
+                            <div class="p-3 pt-0" *ngFor="let logo of week.mostPickedTeams">
+                                <div class="progress">
+                                    <img src="../../../assets/logos/{{logo.logoImageSrc}}">&nbsp;
+                                    <div class="progress-bar bg-success progress-bar-success" role="progressbar"
+                                        [ngStyle]="setMyStyles(week,logo)" aria-valuemin="0" aria-valuemax="100">
+                                        <span>{{logo.pickCount}}</span></div>
+                                </div>
+                            </div>
+                            <!-- <div class="p-3 pt-0">
+                            <div class="progress">
+                                <img src="../../../assets/logos/Chicago Bears.gif">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 60%"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="p-3 pt-0">
+                            <div class="progress">
+                                <img src="../../../assets/logos/Cincinatti Bengals.gif">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 30%"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div> -->
+                        </div>
+                        <div class="p-3 pt-0">
+                            <button type="button" [disabled]="!CheckCuttOff(obj)"
+                                (click)="joinClub(obj.pool_ID, obj.pool_Name, obj.private, obj.passCode)"
+                                class="btn btn-primary btn-sm btn-block">Join Club</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6" *ngIf="clubsAll?.length <= 0">
+                No Club to Join!
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Congrats-->
+<div class="modal fade-color" tabindex="-1" role="dialog" style="display: none"
+    [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title center" id="exampleModalLongTitle">Congrats</h5>
+            </div>
+            <div class="modal-body">
+                <p class="text-center p-0">You Have Selected</p>
+                <p class="text-center"><b>{{selectedClub}}</b></p>
+                <p class="text-center p-0">Lets add some tickets.</p>
+                <div class="row">
+                    <div class="col-md-12 pb-3"><img class="ticket-img center" src="../../../assets/tickets icon.svg">
+                    </div>
+                </div>
+                <p> On the next screen you will: - Add number of ticket entries - Share individual tickets with other
+                    people for them to manage via email.(optional)</p>
+                <p><label class="form-check-label"><input class="" (change)="hideJoinModalForFuture($event.srcElement)"
+                            type="checkbox"> Do not display this message
+                        again</label>
+                </p>
+            </div>
+            <div class="add-ticket-toolbar">
+                <button type="button" class="btn btn-secondary center" (click)="cancelAction()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Tickets-->
+<div class="modal fade-color" tabindex="-1" role="dialog" style="display: none"
+    [style.display]="showModalAddTicket ? 'block' : 'none'">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title center" id="exampleModalLongTitle">TICKETS</h5>
+            </div>
+            <div class="modal-body" [style.display]="ShowticketCreated ? 'none' : 'block'">
+                <p class="text-center p-0">You have Joined {{selectedClub}}</p>
+
+                <p class="text-center p-0">How many tickets would you like?</p>
+                <form>
+                    <div class="row">
+                        <div class="col-md-12 pb-3">
+                            <input type="text" #noOfTickets placeholder="No. of tickets"
+                                class="form-control add-ticket-text">
+                        </div>
+
+                    </div>
+                    <div class="add-ticket-toolbar">
+                        <button type="button" class="btn btn-primary center"
+                            (click)="AddTickets(noOfTickets.value, selectedClubId)">Add
+                            Tickets</button>
+                        <br>
+                        <button type="button" class="btn btn-secondary center" (click)="GoBackFromAddTicket()">Go
+                            Back</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body" [style.display]="ShowticketCreated ? 'block' : 'none'">
+                <p class="text-center p-0">Congratulations!</p>
+
+                <p class="text-center p-0">You have just added {{NewTickets}}</p>
+                <div class="add-ticket-toolbar">
+                    <button type="button" class="btn btn-primary center" (click)="AddMoreTickets()">Add
+                        More Tickets</button>
+                    <br>
+                    <button type="button" class="btn btn-secondary center" (click)="GoToTickets()">Show All
+                        Tickets</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Private Pool-->
+<div class="modal fade-color" tabindex="-1" role="dialog" style="display: none"
+    [style.display]="showModalPrivate ? 'block' : 'none'">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title center" id="exampleModalLongTitle">Attention</h5>
+            </div>
+            <div class="modal-body" [style.display]="ShowticketCreated ? 'none' : 'block'">
+                <p class="text-center p-0">{{selectedClub}} is a private Pool.</p>
+
+                <p class="text-center p-0">Please enter the passcode for join this pool.</p>
+                <form [formGroup]="AddPasscode">
+                    <div class="row">
+                        <div class="col-md-12 pb-3">
+                            <input type="text" formControlName="passCode" placeholder="Enter Passcode"
+                                class="form-control add-ticket-text">
+                        </div>
+                    </div>
+                    <div class="add-ticket-toolbar">
+                        <button type="button" class="btn btn-primary center"
+                            (click)="SubmitPrivatePool()">Submit</button>
+                        <br>
+                        <button type="button" class="btn btn-secondary center"
+                            (click)="CancelPrivatePool()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Private Pool-->
+<div class="modal fade-color" tabindex="-1" role="dialog" style="display: none"
+    [style.display]="showModalReminder ? 'block' : 'none'">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title center" id="exampleModalLongTitle">Attention</h5>
+            </div>
+            <div class="modal-body" [style.display]="ShowticketCreated ? 'none' : 'block'">
+                <p class="text-center p-0">It looks like some tickets do not have any selections.</p>
+
+                <div class="row">
+                    <div class="col-md-12 pb-3">
+                        <p class="entrylist">
+                            <b *ngFor="let obj of PickList">{{obj.entryName}}<span
+                                    *ngIf="obj.entryName.length > 1">,&nbsp;</span></b>
+                        </p>
+                    </div>
+                </div>
+                <p>
+                    You have up until Friday midnight to make and change your pick.
+                </p>
+                <p>
+                    Just check on the ticket you want to and you will redirected to the PICK CENTER.
+                </p>
+                <p>
+                    You can find help in the Help and Rules section.
+                </p>
+                <div class="add-ticket-toolbar">
+                    <!-- <button type="button" class="btn btn-primary center" (click)="SubmitReminder()">Go to
+                        TICKETS</button>
+                    <br> -->
+                    <button type="button" class="btn btn-secondary center" (click)="CancelReminder()">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Custom Popup
+<div class="modal fade-color" tabindex="-1" role="dialog" style="display: none;"
+    [style.display]="showModalCustom ? 'block' : 'none'">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title center" id="exampleModalLongTitle">{{CustomMessages?.alert_Name}}</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 pb-3">
+                        <p class="entrylist">
+                           {{CustomMessages?.alert_Description}} 
+                        </p>
+                    </div>
+                </div>
+                <div class="add-ticket-toolbar">
+                    <button type="button" class="btn btn-secondary center" (click)="CancelCustom()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

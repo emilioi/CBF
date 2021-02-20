@@ -1,0 +1,72 @@
+<div id="content" class="flex">
+    <div _ngcontent-erp-c5="" class="p-3 b-b">
+        <div _ngcontent-erp-c5="" class="toolbar"><a _ngcontent-erp-c5="" class="btn btn-sm btn-white i-con-h-a"
+                data-pjax-state="" title="Back" [routerLink]="['/entry-list']"><i _ngcontent-erp-c5=""
+                    class="i-con i-con-arrow-left text-muted"><i _ngcontent-erp-c5=""></i></i></a><button
+                _ngcontent-erp-c5="" class="btn btn-sm btn-white d-md-none" data-modal="" data-target="#content-aside"
+                data-toggle="modal"><i _ngcontent-erp-c5="" class="i-con i-con-nav text-muted"></i></button></div>
+    </div>
+    <div class="" id="page-container">
+        <div class="p-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <form [formGroup]="entryForm">
+                            <div class="card-header"><strong>Entry Detail</strong></div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-2"><label>Pool Name:</label>
+                                    </div>
+                                    <div class="form-group col-sm-10"><label>{{PoolName}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <input formControlName="entryID" hidden>
+                                    <div class="form-group col-sm-2"><label>Entry ID:</label>
+                                    </div>
+                                    <div class="form-group col-sm-10"><label>{{entry?.entryID}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-2"><label>Entry Name:</label>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <input class="form-control" type="text" formControlName="entryName">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                        <div class="form-group col-sm-2"><label>Eliminated:</label>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <select class="form-control" formControlName="eliminated" >
+                                                <option value="true">True</option>
+                                                <option value="false">False</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <input type="submit" value="Update" style="margin-top: 3px;" (click)="updateEntry()" class="btn btn-primary btn-sm">
+                                        </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Pick Summary Start-->
+                    <div class="tab-pane  fade active show" style="display: none"
+                        [style.display]="ShowCurrentPick ? 'block' : 'none'">
+                        <h5 class=" pb-3 text-center">Picks</h5>
+                        <div class="row pb-3">
+                            <div class="col-4  pb-3 text-center" *ngFor="let obj of LogoWeeks; let index=index">
+                                <img src='../../../assets/logos/{{obj.logoImageSrc}}'
+                                    onError="this.src='../../../assets/logos/noimgfound.png'" height="45px"
+                                    width="45px" />
+                                <div>Week
+                                    {{obj.weekNumber}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pick Summary Ends /-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

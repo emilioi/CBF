@@ -1,0 +1,65 @@
+<div class="col-sm-12 pt-3">
+   <div class="row pt-3 top-navigation-bar">
+    <div class="col-sm-12 ">
+        <a style="float:left;"  (click)="BackToClubs()" class=" text-uppercase"
+            title="Back to Club">
+            <span class="back-icon">
+                <i style="float: left;" class="mr-2 i-con i-con-left left"></i>BACK</span>
+        </a>
+        <span class="center">{{ClubDetail?.pool_Name}}</span>
+    </div>
+</div>
+ <app-report-navbar [PoolID]="SelectedPoolId" PageName="default-picks"></app-report-navbar>
+
+ <div class="p-1">
+    <div class="mb-5">
+        <div class="table-center">
+            <table style="width: 100% !important" class="table table-theme table-row v-middle pick-analysis">
+                <thead>
+                    <tr>
+                        <th>TEAM</th>
+                         <th>OPPONENT</th>
+                         <th>SCHEDULE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let item of CurrentWeeklyDefaults">
+                                <td class="pool-default-team"> <span><img title="{{item.homeTeamName}}"   
+                                    src="../../../assets/logos/{{item.homeLogoImageSrc}}"
+                                    onError="this.src='../../../assets/logos/noimgfound.png'"> {{item.homeTeamName}}</span></td>
+                                <td  class="pool-default-team"> <span><img title="{{item.visitingTeamName}}"     
+                                    onError="this.src='../../../assets/logos/noimgfound.png'"
+                                    src="../../../assets/logos/{{item.visitingLogoImageSrc}}"> {{item.visitingTeamName}}</span></td>
+                                <td><span>{{item.description}}</span></td>
+                        </tr>
+
+                    </tbody>
+                    </table>
+          </div>
+      </div>
+ </div>
+                    
+ <!-- <div>
+    <div class="sortable-list-item" *ngFor="let item of CurrentWeeklyDefaults">
+        <div class=" match-hover shadow row">
+            <div class="Home-Team col-lg-5">
+                <div class="team-name"> {{item.homeTeamName}}</div>
+                <img title="{{item.homeTeamName}}"
+                    src="../../../assets/logos/{{item.homeLogoImageSrc}}"
+                    onError="this.src='../../../assets/logos/noimgfound.png'">
+            </div>
+            <div class="versus  col-lg-2">
+                <h6>VS</h6>
+            </div>
+            <div class="Visiting-Team  col-lg-5">
+                <div class="team-name">{{item.visitingTeamName}}
+                </div>
+                <img title="{{item.visitingTeamName}}"
+                    onError="this.src='../../../assets/logos/noimgfound.png'"
+                    src="../../../assets/logos/{{item.visitingLogoImageSrc}}">
+            </div>
+        </div>
+    </div>
+ </div> -->
+
+ </div>

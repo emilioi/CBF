@@ -1,0 +1,26 @@
+div#aside {
+    padding: 0px !important;
+}
+ .nav-rules .nav-link.active
+ {
+    color: #000000;
+    background-color: #d4e8ff;
+    border: 1px solid #004496;
+    border-bottom: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.rules li{
+    list-style-type: decimal;
+}
+.rules li p{
+   text-align: justify;
+}
+.nav-rules{
+    border-bottom: 1px solid #ddd;
+}
+.nav-rules li, .nav-rules li a{
+    border-bottom: 0px;
+}

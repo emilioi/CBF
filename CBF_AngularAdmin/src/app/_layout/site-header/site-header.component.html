@@ -1,0 +1,67 @@
+<header id="header" class="page-header bg-white box-shadow animate fadeInDown sticky" data-class="bg-white">
+  <div class="navbar navbar-expand-lg">
+    <!-- btn to toggle sidenav on small screen -->
+    <a class="d-lg-none i-con-h-a px-1" data-toggle="modal" data-target="#aside" data-pjax-state="">
+      <i class="i-con i-con-menu text-muted"></i>
+    </a>
+    <!-- brand -->
+    <a href="index.html" class="navbar-brand" data-pjax-state="">
+
+      <img src="assets/CBF_logo.svg" alt="...">
+      <span class="hidden-folded d-inline l-s-n-1x ">CBF</span>
+    </a>
+    <!-- / brand -->
+
+    <!-- Navbar collapse -->
+    <div class="collapse navbar-collapse order-2 col-lg-1 order-lg-1" id="navbarToggler">
+      <form class="input-group m-2 my-lg-0 i-con-h-a ">
+        <span class="input-group-prepend">
+          <a (click)="pageRefresh()" title="Refresh" class="btn no-shadow no-bg px-0"><i
+              class="mr-2 i-con i-con-refresh text-fade w-16"></i>Refresh</a>
+        </span>
+      </form>
+    </div>
+
+    <ul class="nav navbar-menu order-1 order-lg-2">
+
+
+
+      <!-- User dropdown menu -->
+      <li class="nav-item dropdown">
+        <a data-toggle="dropdown" class="nav-link d-flex align-items-center py-0 px-lg-0 px-2 text-color"
+          data-pjax-state="">
+          <span class=" mx-2 d-none l-h-1x d-lg-block text-right">
+            <small class="text-fade d-block mb-1">Hello, Welcome</small>
+            <span>{{userObj.userInfo.first_Name}}</span>
+          </span>
+          <span class="avatar w-36"   style="overflow: hidden; height:36px;" >
+            <img  onerror="this.src='../assets/img/a3.jpg'" 
+            src="assets/profile/Administrators/{{userObj.userInfo?.image_Url}}"  alt="...">
+          </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right w pt-0 mt-3 animate fadeIn">
+     
+          <a class="dropdown-item" [routerLink]="['/profile']" data-pjax-state="">
+            <span>Profile</span>
+          </a>
+          <a class="dropdown-item" [routerLink]="['/profile-setting']" data-pjax-state="">
+            <span>Reset Password</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/help']" data-pjax-state="">
+            Need help?
+          </a>
+          <a class="dropdown-item" (click)="signOut()" data-pjax-state="">Sign out</a>
+        </div>
+      </li>
+      <!-- Navarbar toggle btn -->
+      <li class="nav-item d-lg-none">
+        <a class="nav-link i-con-h-a px-1" data-toggle="collapse" data-toggle-class=""
+          data-target="#navbarToggler" data-pjax-state="">
+          <i class="i-con i-con-nav text-muted"><i></i></i>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</header>

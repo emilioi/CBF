@@ -1,0 +1,91 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <div class="fade aside aside-sm" id="content-aside">
+            <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+                <div class="navbar"><span class="text-md">Entries By Referral</span>
+                    <!-- <div class="dropdown dropright"><a [routerLink]="['/add-entry']"
+                                class="btn btn-sm btn-link btn-icon i-con-h-a no-shadow"><i
+                                    class="i-con i-con-plus"></i></a>
+                       
+                        </div> -->
+                </div>
+                <div class="reference-list">
+                    <div class="sidenav mt-2">
+                        <nav class="nav-active-text-primary" data-nav="">
+                            <ul class="nav">
+                                <li *ngFor='let member of referenceList'> <a class="btn btn-white" (click)="geEntryList(member.reference)"
+                                        data-pjax-state=""><span class="nav-text word-wrap">{{member?.reference}}</span> <span
+                                            class="nav-badge">
+                                            <b class="badge badge-sm badge-pill bg-primary">{{member?.memberCount}}</b>
+                                        </span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex px-3">
+            <div class="d-flex flex-column flex">
+                <div class="p-3">
+                    <div class="toolbar">
+
+                    </div>
+                </div>
+                <div class="scroll-y">
+                    <div class="">
+                        <div class="scroll-y">
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div id="accordion" class="mb-4">
+                                            <div class="card mb-1" *ngFor="let obj of entryList; let index = index">
+                                                <div class="card-header" id="headingOne">
+                                                    <a href="#" data-toggle="collapse"
+                                                        [attr.data-target]="'#abc'+obj.memberID" aria-expanded="false"
+                                                        aria-controls="collapseOne" class="collapsed" >
+                                                        <table style="width: 100%">
+                                                            <tr>
+                                                                <td style="width: 220px;">{{obj.fullName}}</td>
+                                                                <td style="width: 480px;">{{obj.login_ID}}</td>
+                                                                <td><span class="badge badge-warning">{{obj.entryWeekLists[0].entryID > 0 ? obj.count : '0'}}</span></td>
+                                                            </tr>
+                                                        </table>
+                                                    </a>
+                                                </div>
+                                                <div [attr.id]="'abc'+obj.memberID" class="collapse"
+                                                    aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <table class="table table-theme v-middle">
+                                                            <thead class="text-muted">
+                                                                <tr>
+                                                                    <th>Pool ID</th>
+                                                                    <th>Pool Name</th>
+                                                                    <th>Entry Name</th>
+                                                                    <th>Defaults</th>
+                                                                    <th>Eliminated?</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let entries of obj.entryWeekLists" >
+                                                                    <td *ngIf="entries.entryID > 0">{{entries.poolID}}</td>
+                                                                    <td *ngIf="entries.entryID > 0">{{entries.pool_Name}}</td>
+                                                                    <td *ngIf="entries.entryID > 0">{{entries.entryName}}</td>
+                                                                    <td *ngIf="entries.entryID > 0">{{entries.defaults}}</td>
+                                                                    <td *ngIf="entries.entryID > 0">{{entries.eliminated}}</td>
+                                                                </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

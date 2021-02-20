@@ -1,0 +1,142 @@
+.right-arrow{
+    font-size: 16px;
+    margin-right: 10px;
+}
+.ftlt{
+    float: left;
+    width: 33%;
+}
+.progress-bar{
+    line-height: 26px;
+    text-align: right;
+    padding-right: 5px;
+}
+.progress{
+    height: 26px;
+}.progress img{
+    width: 50px;
+    height: 100%;
+}
+.center{
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+.ticket-img{
+width: 150px;
+}
+.no-pick{
+    padding: 0px 6pt;
+    border-radius: 6pt;
+}
+.col-sm-3 .card p,.col-sm-3 .card span{
+    font-size: 11px;
+}
+
+.card.border-card {
+    border: 3px solid rgba(245, 245, 245, 1);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+}
+a.bg-primary.p-0.text-center.block.d-block {
+    border-radius: 5px 5px 0px 0px;
+}
+
+.add-ticket-toolbar .btn{
+width:80%;
+}
+.add-ticket-toolbar
+{
+    margin-bottom: 20px;
+}
+.add-ticket-text
+{
+    margin:0 auto;
+}
+.card.border-card {
+    border: 0px !important;
+}
+p.entrylist {
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.entrylist b:last-child span {
+    display: none;
+}
+a.btn.center.btn-primary.btn-sm {
+    color: white;
+}
+.min-h-60{
+    min-height: 85px;
+}
+.lock .i-con-lock i:before {
+    height: 38% !important;
+}
+.red-bar{
+    background: #ffc6c6;
+    border-radius: 4px;
+    color: black;
+}
+.green-bar{
+    background: #d7f3d1;
+    border-radius: 4px;
+    color: black;
+}
+@media(min-width: 768px)
+{   .mobile-alert{
+display: none;
+} 
+.desktop-alert{
+    display: block;
+}
+}
+@media(max-width: 767.99px)
+{   .mobile-alert{
+display: block;
+} 
+.desktop-alert{
+    display: none;
+}
+}
+
+.mobile-close-bar{
+    float: right;
+    bottom: 0px;
+    position: relative;
+    border: 1px solid;
+    padding: 2px;
+    border-radius: 100%;
+    font-size: 11px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+.close-span{
+
+   display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    vertical-align: middle;
+    height: 100%;
+    float: right;
+}
+  .title{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    vertical-align: middle;
+    height: 100%;
+  }
+
+  .nhl-pool .card-title span {
+    background: #3b3232 !important;
+}
+
+
+.nhl-pool .btn {
+    background: #3b3232 !important;
+}

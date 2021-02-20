@@ -1,0 +1,180 @@
+<div id="content" class="flex"  [style.display]="!PermissionCheck() ? 'none' : 'block'">
+    <div class="d-flex flex h-100">
+        <div class="fade aside aside-sm" id="content-aside">
+            <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+                <div class="navbar"><span class="text-md">Administrators</span>
+                    <div class="dropdown dropright"><a data-toggle="dropdown" [routerLink]="['/add-administrator']"
+                            class="btn btn-sm btn-link btn-icon i-con-h-a no-shadow"><i
+                                class="i-con i-con-plus"></i></a>
+                        <div class="dropdown-menu w-lg">
+                            <div class="p-3">
+                                <div class="input-group"><input type="text" class="form-control form-control-sm"
+                                        id="newField" placeholder="Group name" required=""> <span
+                                        class="input-group-append"><button
+                                            class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"
+                                            id="newBtn"><i class="i-con i-con-ok"></i></button></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="sidenav mt-2">
+                        <nav class="nav-active-text-primary" data-nav="">
+                            <ul class="nav">
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadAllAdmin()">All</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-success">{{Counts?.allAdminCount}}</b></span></a>
+                                </li>
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadSuperAdmin()">Super Admin</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-success">{{Counts?.superAdminCount}}</b></span></a>
+                                </li>
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadGroupAdmin()">Group Admin</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-danger">{{Counts?.groupAdminCount}}</b></span></a>
+                                </li>
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadAdmin()">Admin</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-warning">{{Counts?.adminCount}}</b></span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex" id="content-body">
+            <div class="d-flex flex-column flex" id="user-list">
+                <div class="p-3">
+                    <div class="toolbar">
+                        <form class="flex">
+                            <div class="input-group"><input type="text" class="form-control form-control-sm search"
+                                    placeholder="Search" required=""> <span class="input-group-append"><button
+                                        class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                                            class="i-con i-con-search text-muted"></i></button></span></div>
+                        </form><button data-toggle="modal" data-target="#content-aside" data-modal=""
+                            class="btn btn-sm btn-white d-md-none i-con-h-a"><i
+                                class="i-con i-con-nav text-muted"><i></i></i></button>
+                    </div>
+                </div>
+                <div class="d-flex flex px-3">
+                    <div class="d-flex flex-column flex">
+                        <div class="scroll-y">
+                            <div class="card">
+                                <div class="list list-row animate fadeIn" *ngIf='userslist?.length >0'>
+                                    <div class="list-item" data-id="8" *ngFor="let user of userslist">
+                                        <div class="col-lg-5">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <a data-pjax-state=""><span class="w-56 avatar circle bg-success-lt"
+                                                            data-toggle-class="loading"
+                                                            style="    overflow: hidden;"><span
+                                                                class="avatar-status on b-white avatar-right"></span>
+                                                            <img src="assets/profile/Administrators/{{user?.image_Url}}?nocache={{cache}}"
+                                                                alt="."></span></a>
+                                                </div>
+                                                <div class="col-lg-9"><a class="item-author link"
+                                                        data-pjax-state="">{{user.first_Name}}</a>
+                                                    <div class="item-mail text-muted h-1x">{{user.email_Address}}</div>
+                                                    <div class="item-tag tag hide">Team</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="item-mail h-1x">Admin Type:
+                                                        <b *ngIf="user.admin_Type == 'Admin'">Admin</b>
+                                                        <b *ngIf="user.admin_Type == 'SuperAdmin'">Super Admin</b>
+                                                        <b *ngIf="user.admin_Type == 'GroupAdmin'">Group Admin</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <!-- <div class="item-action dropdown"><a href="#" data-toggle="dropdown"
+                                                    class="text-muted" data-pjax-state=""><i
+                                                        class="i-con i-con-more"><i></i></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right bg-dark" role="menu">
+                                                    <a class="dropdown-item" (click)="adminDetail(user.member_Id)"
+                                                        data-pjax-state="">See detail
+                                                    </a>
+                                                    <a class="dropdown-item" data-pjax-state=""
+                                                        (click)="editThisAdmin(user.member_Id)">Edit</a>
+                                                    <div class="dropdown-divider"></div><a class="dropdown-item"
+                                                        (click)="delete(user.member_Id)" data-pjax-state="">Delete
+                                                        item</a>
+                                                </div>
+                                            </div> -->
+                                            <div class="row">
+                                                <span class="col-lg-3">
+                                                    <a class=" " (click)="editThisAdmin(user.member_Id)">
+                                                        <span
+                                                            class="badge badge-primary text-uppercase">Edit</span></a></span>
+                                                <span class="col-lg-9"><a class=" " (click)="delete(user.member_Id)"
+                                                        data-pjax-state=""><span
+                                                            class="badge badge-danger text-uppercase">Delete</span></a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="no-result hide">
+                                        <div class="p-4 text-center">No Results</div>
+                                    </div>
+                                </div>
+                                <div class="list list-row animate fadeIn" *ngIf='userslist?.length ==0'>
+                                    <div class="list-item" data-id="8">
+                                        <div>
+                                            <a [routerLink]="['/administrator-details']" data-pjax-state=""><span
+                                                    class="w-56 avatar circle bg-success-lt"
+                                                    data-toggle-class="loading"><span
+                                                        class="avatar-status on b-white avatar-right"></span> <img
+                                                        src="../assets/img/a8.jpg" alt="."></span></a></div>
+                                        <div class="flex"><a [routerLink]="['/administrator-details']"
+                                                class="item-author" data-pjax-state="">No Administrators Found</a>
+                                            <div class="item-mail text-muted h-1x">NA </div>
+                                            <div class="item-tag tag hide">Team</div>
+                                        </div>
+                                        <div>
+                                            <div class="item-action dropdown"><a data-toggle="dropdown"
+                                                    class="text-muted" data-pjax-state=""><i
+                                                        class="i-con i-con-more"><i></i></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right bg-dark" role="menu"><a
+                                                        class="dropdown-item" data-pjax-state="">Edit</a>
+                                                    <a class="dropdown-item" [routerLink]="['/administrator-details']"
+                                                        data-pjax-state="">See detail
+                                                    </a>
+                                                    <div class="dropdown-divider"></div><a class="dropdown-item"
+                                                        data-pjax-state="">Delete item</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="d-flex align-items-center pb-3">
+                                <div class="flex">
+                                    <div class="pagination pagination-xs">
+                                        <li class="active"><a class="page"
+                                                href="javascript:function Z(){Z=&quot;&quot;}Z()">1</a></li>
+                                        <li><a class="page" href="javascript:function Z(){Z=&quot;&quot;}Z()">2</a>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div><span class="text-muted">Total:</span> <span id="count">15</span></div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="content" class="flex p-3"  [style.display]="!PermissionCheck() ? 'block' : 'none'">
+        <h3 class="center">Go to <a [routerLink]="['/entries-by-referral']" class="i-con-h-a">Entries By Referral</a> page</h3>
+    </div>

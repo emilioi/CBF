@@ -1,0 +1,74 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <div id="content" class="flex">
+            <div class="p-3 b-b">
+                <div class="toolbar">
+                    <div class="dropdown dropright">
+                        <a *ngIf="IsRuleList" data-toggle="dropdown" (click)="addRule()"
+                            class="btn btn-sm btn-white i-con-h-a add"><i class="i-con i-con-plus"></i></a>
+                        <a *ngIf="IsRuleEdit" data-toggle="dropdown" (click)="cancel()"
+                            class="btn btn-sm btn-white i-con-h-a add"><i
+                                class="i-con i-con-arrow-left text-muted"><i></i></i></a>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="IsRuleList" class="px-3">
+                <div class="row" style="padding: 0px; margin: 0px 20px;">
+                    <div class="col-lg-12">
+                        <table class="table table-theme v-middle">
+                            <thead class="text-muted">
+                                <tr>
+                                    <th>&nbsp;&nbsp;&nbsp; Action</th>
+                                    <th>Sport Type</th>
+                                    <th>Rule Title</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="v-middle" data-id="7" *ngFor="let rule of rules">
+                                    <td>
+                                        <p><button class="btn btn-sm btn-white i-con-h-a" (click)="delete(rule.rule_Id)"
+                                                title="Delete" id="btn-trash" data-original-title="Trash"><i
+                                                    class="i-con i-con-trash text-muted"><i></i></i></button>
+                                            &nbsp;&nbsp;
+                                            <button class="btn btn-sm btn-white i-con-h-a" (click)="edit(rule.rule_Id)"
+                                                title="Edit" id="btn-trash" data-original-title="Trash"><i
+                                                    class="i-con i-con-edit text-muted"><i></i></i></button>
+                                        </p>
+                                    </td>
+                                    <td>{{rule.game_Type}}</td>
+                                    <td>{{rule.rule_Title}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="IsRuleEdit" class="px-3 pb-5 pt-2">
+                <div class="row" style="padding: 0px; margin: 0px 20px;">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <select [(ngModel)]="objRule.game_Type" class="form-control">
+                                <option value="">Select Sport Type</option>
+                                <option *ngFor="let obj of sportType" value="{{obj?.sportTypeName}}">
+                                    {{obj?.sportTypeName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Rule Title</label>
+                            <input [(ngModel)]="objRule.rule_Title" type="text" class="form-control">
+                        </div>
+                        <div class="form-group editor"><label>Rule</label>
+                            <ckeditor [editor]="Editor" [(ngModel)]="objRule.rule_Content">
+                            </ckeditor>
+                        </div>
+                        <div class="form-group">
+                            <button (click)="updateRules()" style="float: right;" class="btn center btn-primary">
+                                Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

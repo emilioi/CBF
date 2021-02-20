@@ -1,0 +1,41 @@
+.ftlt{
+float: left;
+}
+.header-title{
+    width: 33%;
+}
+.header-logo{
+    width: 33%;
+}
+.profile-link{
+    width: 33%;
+}
+.header-logo .header-logo-lg{
+    width: 40px;
+    margin: 0 auto;
+    float: left;
+    margin-left: 10px;
+}
+.logo-heading{
+    float: left;
+    margin-left: 10px;
+    line-height: 40px;
+}
+.header-title h2{
+    line-height: 40px;
+}
+.profile-link h4
+{
+    text-align: right;
+    line-height: 40px;
+
+}
+.menu-icon{
+    height: 30px;
+    width: 30px;
+    color: white;
+    margin-top: 2px;
+}
+.mid:before {
+    width: 70% !important;
+}

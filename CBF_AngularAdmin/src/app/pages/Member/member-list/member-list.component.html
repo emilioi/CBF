@@ -1,0 +1,286 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <div class="fade aside aside-sm" id="content-aside">
+            <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+                <div class="navbar"><span class="text-md"><b>Members</b></span>
+                    <div class="dropdown dropright"><a data-toggle="dropdown" *ngIf='PermissionCheck()'
+                            [routerLink]="['/add-member']" class="btn btn-sm btn-link btn-icon i-con-h-a no-shadow"><i
+                                class="i-con i-con-plus"></i></a>
+                        <div class="dropdown-menu w-lg">
+                            <div class="p-3">
+                                <div class="input-group"><input type="text" class="form-control form-control-sm"
+                                        id="newField" placeholder="Group name" required=""> <span
+                                        class="input-group-append"><button
+                                            class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"
+                                            id="newBtn"><i class="i-con i-con-ok"></i></button></span></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="reference-list">
+                    <div class="sidenav mt-2">
+                        <nav class="nav-active-text-primary" data-nav="">
+                            <ul class="nav">
+                                <li><a (click)="getMemberListByReference('All')" data-pjax-state=""><span
+                                            class="nav-text">All</span> <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-success">{{ memberlist?.length}}</b></span></a>
+                                </li>
+                                <li>
+                                    <a><span class="nav-text"><b>Referred By:</b></span></a>
+                                </li>
+                                <li *ngFor='let member of referenceList'> <a (click)="getMemberListByReference(member.reference)"
+                                        data-pjax-state=""><span class="nav-text">{{member?.reference}}</span> <span
+                                            class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-primary">{{member?.memberCount}}</b></span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex" id="content-body">
+            <div class="d-flex flex-column flex" id="user-list">
+                <div class="p-3">
+                    <div class="toolbar">
+                        <!-- <button class="btn btn-sm btn-white i-con-h-a sort" data-sort="item-author"
+                            data-toggle="tooltip" title="" data-original-title="Sort"><i
+                                class="i-con i-con-sort text-muted"><i></i></i></button> -->
+                        <form class="flex" [formGroup]="searchFrom">
+                            <div class="row">
+                                <div class="col-1 align-right"><label  style="position: relative; top:4px;">Filter By :</label></div>
+                                <div class="col-2">
+                                    <!-- <label class="pointer" style="position: relative; top:4px;"><input
+                                            class="form-check-input" formControlName='verifiedCheck'
+                                            (change)="onFilterChange()" type="checkbox">Verified/Unverified</label> -->
+                                    <select  class="form-control form-control-sm " (change)="MemberFilterChange($event.target.value)">
+                                        <option>None</option>
+                                        <option>Login_Id</option>
+                                        <option>First_Name</option>
+                                        <option>Last_Name</option>
+                                        <option>Email_Address</option>
+                                        <option>Verified</option>
+                                    </select>
+                                </div>
+                                <div class="col-7">
+                                    <div class=" input-group">
+                                        <label
+                                            *ngIf="filterData.filterByName =='Verified'  && filterData.filterByName !='None'"
+                                            class="pointer" style="position: relative; top:4px;"> <input
+                                                class="form-check-input" formControlName='verifiedCheck'
+                                                type="checkbox">Yes</label>
+                                        <input type="text"
+                                            *ngIf="filterData.filterByName !='Verified' && filterData.filterByName !='None' "
+                                            class="form-control form-control-sm search"
+                                            placeholder="Search by Member Name" formControlName='name'>
+                                        <!-- <span class="input-group-append">
+                                            <button type="submit"
+                                                (click)="getMemberbyReferel()"
+                                                class="btn btn-white no-shadow btn-sm i-con-h-a"><i
+                                                    class="i-con i-con-search text-muted"></i></button>
+                                                </span> -->
+                                    </div>
+                                </div>
+                                
+                                <div class="col-2">
+                                        <a *ngIf="filterData.filterByName !='None'" class="btn btn-sm btn-warning mr-2" (click)="GetMemberByFilter()">Filter</a>
+
+                                    <a class="btn btn-sm btn-warning  ml-2" (click)="exportTOCSV()">Export to CSV</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="d-flex flex px-3">
+                    <div class="d-flex flex-column flex">
+                        <!-- <div class="scroll-y">
+                            <div class="card">
+                                <div class="list list-row animate fadeIn">
+                                    <div class="list-item" data-id="8"
+                                        *ngFor='let member of memberlist | paginate: config'>
+                                        <div class="col-lg-5">
+                                            <div class="row">
+                                                <div class="col-lg-3"><a data-pjax-state=""><span
+                                                            class="w-56 avatar circle bg-success-lt"
+                                                            style="overflow: hidden;" data-toggle-class="loading">
+                                                            <img src="assets/profile/members/{{member.image_Url}}?nocache={{cache}}"
+                                                                alt="."></span></a></div>
+                                                <div class="col-lg-9"><a class="item-author link"
+                                                        data-pjax-state="">{{member.first_Name}}</a>
+                                                    <div class="item-mail text-muted h-1x"><span title="{{member.email_Address}}">{{member.email_Address}}</span>
+                                                    </div>
+                                                    <div class="item-tag tag hide">{{member.login_Id}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="row">
+                                                <div class="col-lg-7">
+                                                    <div *ngIf="member.reference" class="item-mail h-1x">Referred by:
+                                                       <span title="{{member.reference}}">{{member.reference}}</span> </div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <form [formGroup]="verifyMemberForm">
+                                                        <input type="email" formControlName="member_Id" hidden>
+                                                        <div class="form-check"><label class="form-check-label"><input
+                                                                    class="form-check-input"
+                                                                    [checked]="member.is_Active"
+                                                                    (change)="isVeriedOnChange(member.member_Id, member.is_Active)"
+                                                                    value="{{member.is_Active}}" type="checkbox">Is
+                                                                Verified</label>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="row">
+                                                <span class="col-lg-4">
+                                                    
+                                                        <button (click)="editThisAdmin(member.member_Id)"
+                                                            class="btn badge badge-primary text-uppercase">Edit</button> </span>
+                                                <span class="col-lg-4"> 
+                                                        <button  [disabled]='!PermissionCheck()' (click)="delete(member.member_Id)"
+                                                            class="btn badge badge-danger text-uppercase">Delete</button> 
+                                                </span>
+                                                <span class="col-lg-2"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <pagination-controls (pageChange)="pageChange($event)" class="my-pagination">
+                                    </pagination-controls>
+                                </div>
+                                <div class="no-result hide">
+                                    <div class="p-4 text-center">No Results</div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!--============New Layout Start======================-->
+                        <div class="scroll-y">
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-theme v-middle">
+                                            <thead class="text-muted">
+                                                <tr>
+                                                    <th>&nbsp;&nbsp;&nbsp; Action</th>
+                                                    <!-- <th>Member ID</th> -->
+                                                    <th>
+                                                        <div (click)="sortMemberListBy('Login_Id')"
+                                                            [ngClass]="filterData.shortByName =='Login_Id'? filterData.isAscending ? 'asc' : 'desc' :'' "
+                                                            class="th-inner sortable both ">Login ID</div>
+                                                    </th>
+                                                    <th>
+                                                        <div (click)="sortMemberListBy('First_Name')"
+                                                            [ngClass]="filterData.shortByName =='First_Name'? filterData.isAscending ? 'asc' : 'desc' :'' "
+                                                            class="th-inner sortable both">First Name</div>
+                                                    </th>
+                                                    <th>
+                                                        <div (click)="sortMemberListBy('Last_Name')"
+                                                            [ngClass]="filterData.shortByName =='Last_Name'? filterData.isAscending ? 'asc' : 'desc' :'' "
+                                                            class="th-inner sortable both">Last Name</div>
+                                                    </th>
+                                                    <th>
+                                                        <div (click)="sortMemberListBy('Email_Address')"
+                                                            [ngClass]="filterData.shortByName =='Email_Address'? filterData.isAscending ? 'asc' : 'desc' :'' "
+                                                            class="th-inner sortable both">Email</div>
+                                                    </th>
+                                                    <th>Agent</th>
+                                                    <th>
+                                                        <div (click)="sortMemberListBy('Verified')"
+                                                            [ngClass]="filterData.shortByName =='Verified'? filterData.isAscending ? 'asc' : 'desc' :'' "
+                                                            class="th-inner sortable both">Active</div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="v-middle" data-id="7"
+                                                    *ngFor='let member of memberlist | paginate: config'>
+                                                    <td style="width: 12%;">
+                                                        <p><button class="btn btn-sm btn-white i-con-h-a"
+                                                                (click)="delete(member.member_Id)" title="Delete"
+                                                                id="btn-trash" data-original-title="Trash"><i
+                                                                    class="i-con i-con-trash text-muted"><i></i></i></button>
+                                                            <button class="btn btn-sm btn-white i-con-h-a"
+                                                                (click)="editThisAdmin(member.member_Id)" title="Edit"
+                                                                id="btn-trash" data-original-title="Trash"><i
+                                                                    class="i-con i-con-edit text-muted"><i></i></i></button>
+                                                        </p>
+                                                    </td>
+                                                    <!-- <td><a>{{member.member_Id}}</a></td> -->
+                                                    <td>
+                                                        {{member.login_Id}}
+                                                    </td>
+                                                    <td>
+                                                        {{member.first_Name}}
+                                                    </td>
+                                                    <td>
+                                                        {{member.last_Name}}
+                                                    </td>
+                                                    <td>
+                                                        {{member.email_Address}}
+                                                    </td>
+                                                    <td>
+                                                        {{member.reference}}
+                                                    </td>
+                                                    <td>
+                                                        <form [formGroup]="verifyMemberForm"
+                                                            style="padding: 0px; margin: 0px;">
+                                                            <label class="pointer"><input class="form-check-input"
+                                                                    [checked]="member.is_Active"
+                                                                    (change)="isVeriedOnChange(member.member_Id, member.is_Active)"
+                                                                    value="{{member.is_Active}}"
+                                                                    type="checkbox">Verified?</label>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" *ngIf="memberlist?.length > 0"  >
+                                        <pagination-controls (pageChange)="pageChange($event)" class="my-pagination">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--============New Layout End======================-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=======Model Code Start=========-->
+
+<div class="modal fade-color" tabindex="-1" role="dialog" style="display: none"
+    [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="mySmallModalLabel">Member
+                    Verification</h5>
+                <button type="button" class="close" (click)="cancelVerify()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to change the verification
+                    status?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn center btn-secondary" (click)="updateVerification()"
+                    data-dismiss="modal">Yes</button>
+                <button type="button" class="btn center btn-secondary" (click)="cancelVerify()"
+                    data-dismiss="modal">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--================Model Code End==============-->

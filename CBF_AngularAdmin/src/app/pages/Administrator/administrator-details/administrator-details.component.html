@@ -1,0 +1,264 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <!--  <div class="fade aside aside-sm" id="content-aside">
+            <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+                <div class="navbar"><span class="text-md">Administrators</span>
+                    <div class="dropdown dropright"><a data-toggle="dropdown" [routerLink]="['/add-administrator']"
+                            class="btn btn-sm btn-link btn-icon i-con-h-a no-shadow"><i
+                                class="i-con i-con-plus"></i></a>
+                        <div class="dropdown-menu w-lg">
+                            <div class="p-3">
+                                <div class="input-group"><input type="text" class="form-control form-control-sm"
+                                        id="newField" placeholder="Group name" required=""> <span
+                                        class="input-group-append"><button
+                                            class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"
+                                            id="newBtn"><i class="i-con i-con-ok"></i></button></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="sidenav mt-2">
+                        <nav class="nav-active-text-primary" data-nav="">
+                            <ul class="nav">
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadAllAdmin()">All</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-success">{{Counts?.allAdminCount}}</b></span></a>
+                                </li>
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadSuperAdmin()">Super Admin</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-success">{{Counts?.superAdminCount}}</b></span></a>
+                                </li>
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadGroupAdmin()">Group Admin</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-danger">{{Counts?.groupAdminCount}}</b></span></a>
+                                </li>
+                                <li><a [routerLink]="['/administrator-list']" data-pjax-state=""><span class="nav-text"
+                                            (click)="loadAdmin()">Admin</span>
+                                        <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-warning">{{Counts?.adminCount}}</b></span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div> 
+            </div>
+        </div>-->
+        <div id="content" class="flex">
+
+
+            <div class="p-3">
+                <div class="toolbar"><a [routerLink]="['/administrator-list']" class="btn btn-sm btn-white i-con-h-a"
+                        data-pjax-state=""><i class="i-con i-con-arrow-left text-muted"><i></i></i> </a></div>
+            </div>
+            <div class="page-container" id="page-container">
+                <div class="px-3">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <div class="b-b">
+                                            <div class="p-3">
+                                                <!-- <div class="d-flex align-items-center justify-content-around">
+                                            <a class="avatar mx-2 w-96" style="overflow: hidden; height:96px;"
+                                                data-pjax-state=""><img
+                                                    src="assets/profile/Administrators/{{admin?.image_Url}}"
+                                                    onerror="this.src='../assets/img/a8.jpg'" alt="."> </a>
+                                        </div> -->
+
+                                                <div class="d-flex align-items-center justify-content-around">
+                                                    <div class="avatar mx-2 w-96" style="overflow: hidden; height:96px;"
+                                                        data-pjax-state=""><img
+                                                            src="assets/profile/administrators/{{currentProfilePic}}?nocache={{cache}}"
+                                                            id="imgTeamLogo" alt="." *ngIf="!imageSrc">
+                                                            <img *ngIf="imageSrc" [src]="imageSrc">
+                                                        <span onclick="$('#inputGroupFile04').click();"
+                                                            class="edit-button">Edit</span>
+                                                    </div>
+                                                </div>
+                                                <!--File upload hidden control-->
+                                                <div class="form-group  hidden">
+
+                                                    <input type="file" (change)="handleInputChange($event)"
+                                                        id="inputGroupFile04">
+
+                                                </div>
+
+                                                <div class="text-center mt-3"><a class="h6" data-pjax-state="">
+                                                        {{admin?.first_Name}}&nbsp;{{admin?.last_Name}}
+                                                    </a> <small
+                                                        class="d-block text-muted mt-2">{{admin?.login_Id}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="py-3">
+                                            <ul class="nav flex-column">
+                                                <!-- <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                    class="i-con i-con-pin"></i> <span
+                                                    class="mx-2">Califorlia</span></a></li> -->
+                                                <!-- <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                    class="i-con i-con-phone"><i></i></i> <span
+                                                    class="mx-2">{{admin?.phone_Number}}</span></a></li> -->
+                                                <!-- <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                    class="i-con i-con-time"><i></i></i> <span class="mx-2">July
+                                                    10</span></a></li> -->
+                                                <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                            class="i-con i-con-mail"><i></i></i> <span
+                                                            class="mx-2">{{admin?.email_Address}}</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 b-l">
+                                        <div class="p-4">
+                                            <div class="row pt-3">
+                                                <span class="col-lg-12"><strong>Last login</strong></span>
+                                                <div class="col-lg-12">
+                                                    {{admin?.last_Login | date: 'dd/MM/yyyy h:mma'}}
+                                                </div>
+                                            </div>
+                                            <div class="row pt-3">
+                                                <span class="col-lg-12"><strong>Last failed
+                                                        login</strong></span>
+                                                <div class="col-lg-12">
+                                                    {{admin?.last_Failed_Login | date: 'dd/MM/yyyy h:mma'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form novalidate="" [formGroup]="adminReg" (ngSubmit)="createAdmin()">
+                                <div class="card">
+                                    <div class="card-header"><strong>Add New Administrator</strong></div>
+                                    <div class="card-body">
+                                        <p class="text-muted"><label class="required">Required Field</label>
+                                        </p>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="required">First
+                                                    name</label><input type="text" autocomplete="bandhai"
+                                                    class="form-control" formControlName='first_Name' id="fname">
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Last
+                                                    name</label><input type="text" class="form-control"
+                                                    formControlName='last_Name' autocomplete="bandhai">
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label class="required">Username</label><input disabled
+                                                type="text" class="form-control" formControlName='login_Id'
+                                                autocomplete="bandhai" (focusout)="checkloginidExist()">
+                                            <div *ngIf='isUserNameExist'>
+                                                <span style="color:red">User name already exist</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div *ngIf='isEditableMode' class="form-group"><label
+                                                    class="required">Username</label><input type="text" class="form-control"
+                                                    formControlName='login_Id' autocomplete="bandhai" disabled>
+    
+                                            </div> -->
+
+                                        <div class="form-group"><label class="required">Email</label><input disabled
+                                                type="email" class="form-control" (focusout)="checkEmailExist()"
+                                                autocomplete="bandhai" formControlName='email_Address'>
+                                            <div *ngIf='isEmailExist'>
+                                                <span style="color:red">Email already exist</span>
+                                            </div>
+                                        </div>
+                                        <div hidden class="form-group hidden"><label
+                                                class="required">Phone</label><input type="number" class="form-control"
+                                                formControlName='phone_Number' placeholder="XXX XXXX XXX" required=""
+                                                autocomplete="bandhai">
+                                        </div>
+
+                                        <div class="form-group"><label class="required" [style.display]="!PermissionCheck() ? 'none' : 'block'">
+                                                Admin Type
+                                            </label><select class="custom-select"  [style.display]="!PermissionCheck() ? 'none' : 'block'"(change)="AdminTypeChange($event.taregt.value)" formControlName="admin_Type">
+                                                <option value="SuperAdmin">Super Admin</option>
+                                                <option value="GroupAdmin">Group Admin</option>
+                                                <option value="Admin">Admin</option>
+                                            </select></div>
+                                        <!-- 
+                                            <div class="form-group">
+                                                <label>Profile pic</label>
+                                                <div class="form-image">
+                                                    <img src="/assets/logos/{{currentProfilePic}}" id="imgTeamLogo"
+                                                        width="120px" />
+
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input formControlName='adminImage' type="file"
+                                                        (change)="handleInputChange($event)" id="inputGroupFile04">
+                                                </div>
+                                            </div> -->
+
+                                        <div *ngIf='!isEditableMode' class="form-row">
+                                            <div class="form-group col-sm-6"><label class="required">Enter
+                                                    password</label><input [type]="show ? 'text' : 'password'"
+                                                    class="form-control password" required="" formControlName='password'
+                                                    id="pwd" autocomplete="bandhai">
+                                                <i (click)="password()" class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Confirm
+                                                    password</label><input [type]="show ? 'text' : 'password'"
+                                                    class="form-control password" autocomplete="bandhai"
+                                                    formControlName="cnfpassword" data-parsley-equalto="#pwd"
+                                                    required="">
+                                                <i (click)="password()" class="mr-2 i-con i-con-eye pwd glyphicon"></i>
+                                            </div>
+                                        </div>
+                                        <div *ngIf='isEditableMode' class="form-row">
+                                            <button type="button" (click)="showPwdInput()"
+                                                class="btn w-sm mb-1 btn-sm btn-primary">Change
+                                                Password</button>
+                                        </div>
+                                        <div *ngIf='!CancelEditableMode' class="form-row">
+                                            <button type="button" (click)="hidePwdInput()"
+                                                class="btn w-sm mb-1 btn-sm btn-secondary">Cancel</button>
+                                        </div>
+                                        <div *ngIf='showPwdInputBtn' class="form-row">
+                                            <div class="form-group col-sm-6"><label class="required">Enter
+                                                    password</label><input type="password" class="form-control"
+                                                    required="" formControlName='password' id="pwd"
+                                                    autocomplete="bandhai">
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Confirm
+                                                    password</label><input type="password" class="form-control"
+                                                    autocomplete="bandhai" formControlName="cnfpassword"
+                                                    data-parsley-equalto="#pwd" required="">
+                                            </div>
+                                        </div>
+                                        <div class="text-right"><button type="submit"
+                                                class="btn btn-primary">Submit</button></div>
+
+                                        <!-- [disabled]="!adminReg.valid || submitted" -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row"  *ngIf="adminType == 'SuperAdmin'" [style.display]="!PermissionCheck() ? 'none' : 'block'">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header"><strong>Assign Member to this Admin</strong></div>
+                                <div class="card-body">
+                                    <app-assign-group-admin [GroupAdminID]="Id" *ngIf="adminType == 'SuperAdmin'"></app-assign-group-admin>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

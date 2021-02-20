@@ -1,0 +1,136 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <div class="fade aside aside-sm" id="content-aside">
+            <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+                <div class="navbar"><span class="text-md">Members</span>
+                    <div class="dropdown dropright"><a data-toggle="dropdown" [routerLink]="['/add-member']"
+                            class="btn btn-sm btn-link btn-icon i-con-h-a no-shadow"><i
+                                class="i-con i-con-plus"></i></a>
+                        <div class="dropdown-menu w-lg">
+                            <div class="p-3">
+                                <div class="input-group"><input type="text" class="form-control form-control-sm"
+                                        id="newField" placeholder="Group name" required=""> <span
+                                        class="input-group-append"><button
+                                            class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"
+                                            id="newBtn"><i class="i-con i-con-ok"></i></button></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="sidenav mt-2">
+                        <nav class="nav-active-text-primary" data-nav="">
+                            <ul class="nav">
+                                <li><a [routerLink]="['/member-list']" data-pjax-state=""><span
+                                            class="nav-text">All</span> <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-primary">{{ memberlist?.length}}</b></span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex" id="content-body">
+            <div class="d-flex flex-column flex">
+                <div class="p-3">
+                    <div class="toolbar"><a [routerLink]="['/member-list']" class="btn btn-sm btn-white i-con-h-a"
+                            data-pjax-state=""><i class="i-con i-con-arrow-left text-muted"><i></i></i> </a><button
+                            data-toggle="modal" data-target="#content-aside" data-modal=""
+                            class="btn btn-sm btn-white d-md-none"><i class="i-con i-con-nav text-muted"></i></button>
+                    </div>
+                </div>
+                <div class="scroll-y px-3">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <div class="b-b">
+                                    <div class="p-3">
+                                        <div class="d-flex align-items-center justify-content-around">
+                                            <a class="avatar mx-2 w-96" style="overflow: hidden; height:96px;" data-pjax-state=""><img
+                                                src="assets/profile/members/{{member?.image_Url}}"    alt="."> </a>
+                                        </div>
+                                        <div class="text-center mt-3"><a class="h6" data-pjax-state="">
+                                                {{member?.first_Name}}&nbsp;{{member?.last_Name}}
+                                            </a> <small class="d-block text-muted mt-2">{{member?.login_Id}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-3">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                    class="i-con i-con-phone"><i></i></i> <span
+                                                    class="mx-2">{{member?.phone_Number}}</span></a></li>
+
+                                        <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                    class="i-con i-con-mail"><i></i></i> <span
+                                                    class="mx-2">{{member?.email_Address}}</span></a></li>
+                                    </ul>
+                                    <form [formGroup]="verifyMemberForm">
+                                        <input type="email" formControlName="member_Id" hidden>
+                                        <div class="pl-3 mb-3"><label class="md-switch"><input
+                                                    formControlName="is_Active" type="checkbox"
+                                                    (change)="isVeriedOnChange()">
+                                                <i class="blue"></i>Is Verified</label></div>
+
+                                        <!--=======Model Code Start=========-->
+
+                                        <div class="modal fade-color" tabindex="-1" role="dialog" style="display: block"
+                                            [style.display]="showModal ? 'block' : 'none'">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title h4" id="mySmallModalLabel">Member
+                                                            Verification</h5>
+                                                        <button type="button" class="close" (click)="cancelVerify()"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure to change the verification status?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn center btn-secondary"
+                                                            (click)="updateVerification()"
+                                                            data-dismiss="modal">Yes</button>
+                                                        <button type="button" class="btn center btn-secondary"
+                                                            (click)="cancelVerify()" data-dismiss="modal">NO</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--================Model Code End==============-->
+
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8 b-l">
+                                <div class="p-4">
+                                    <p><strong>Last Login</strong></p>
+                                    <div class="timeline pb-3 timeline-theme animates animates-fadeInUp">
+                                        <div class="tl-item active">
+                                            <div class="tl-dot"></div>
+                                            <div class="tl-content">
+                                                <div class="">{{member?.last_Login | date: 'dd/MM/yyyy'}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p><strong>Last Failed Login</strong></p>
+                                    <div class="timeline timeline-theme animates animates-fadeInUp">
+                                        <div class="tl-item active">
+                                            <div class="tl-dot"></div>
+                                            <div class="tl-content">
+                                                <div class="">{{member?.last_Failed_Login | date: 'dd/MM/yyyy'}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

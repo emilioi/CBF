@@ -1,0 +1,90 @@
+.pool-default-team img
+{
+    width:25px;
+    margin-right: 20px;
+    border:1px solid #eee;
+    box-shadow: #eee 0px 1px 5px ;
+}
+
+ 
+
+.table-theme tbody td span {
+    background-color: #fff;
+    border-width: 0;
+    padding: 10px 10px;
+    display: block;
+    box-shadow: 0px 0px 32px #8898AA26;
+    border-radius: 4px;
+    
+font: Bold 15px/18px Google Sans;
+letter-spacing: 0;
+ 
+opacity: 1;
+}
+
+.table-theme tbody td  {
+    background-color: transparent !important;
+    border-width: 0;
+    padding: 5px !important;
+    box-shadow: none !important;
+}
+.table-center
+{
+    margin: 0 auto;
+    overflow-x: scroll;
+}
+.h-center td {
+    text-align: center;
+}
+
+.color-red {
+    color: red !important;
+   
+    font-weight: bold;
+}.color-red span{
+    background: pink !important;
+}
+ 
+.back-icon i{
+    position: relative;
+    right: -10px;
+    top: 1px;
+   }
+ .eliminated-heading
+ {
+    text-align: left;
+    font: Bold 18px/22px Google Sans;
+    letter-spacing: 0;
+    opacity: 1;
+    height: 50px;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+box-shadow: 0px 0px 32px #8898AA26;
+border-radius: 4px;
+ }
+ .eliminated-heading i{
+     width: 20px;
+     height: 20px;
+     border-width: 3px;
+     margin: -5px 0;
+ }
+ 
+ .pick-analysis thead tr th{
+    height: 19px;
+text-align: left;
+font: Bold 15px/18px Google Sans;
+letter-spacing: 0;
+color: #32325D;
+opacity: 1;
+ }
+ 
+ 
+   
+   @media (max-width: 360px)
+   {
+       .btn-top-toolbar-outline,.btn-top-toolbar{
+           width: 100%;
+           font-size:8px; 
+       }
+   }
+   
+  

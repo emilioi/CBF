@@ -1,0 +1,45 @@
+<div id="content" class="flex">
+    <div _ngcontent-erp-c5="" class="p-3 b-b">
+        <div _ngcontent-erp-c5="" class="toolbar"><a _ngcontent-erp-c5="" class="btn btn-sm btn-white i-con-h-a"
+                data-pjax-state="" title="Back" [routerLink]="['/email-templates']"><i _ngcontent-erp-c5=""
+                    class="i-con i-con-arrow-left text-muted"><i _ngcontent-erp-c5=""></i></i></a> <button
+                _ngcontent-erp-c5="" class="btn btn-sm btn-white d-md-none" data-modal="" data-target="#content-aside"
+                data-toggle="modal"><i _ngcontent-erp-c5="" class="i-con i-con-nav text-muted"></i></button></div>
+    </div>
+    <div class="" id="page-container">
+        <div class="p-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form [formGroup]="updateTemplate">
+                        <div class="card">
+                            <div class="card-header"><strong>Edit Template</strong></div>
+                            <div class="card-body">
+                                <div class="form-group"><label>Email ID </label>
+                                    <input formControlName='emailID' type="text" class="form-control" disabled>
+                                </div>
+                                <div class="form-group"><label>Purpose </label><input formControlName='purpose'
+                                        autocomplete="off" type="text" class="form-control">
+                                </div>
+                                <div class="form-group"><label>From </label><input formControlName='fromAddress'
+                                        autocomplete="off" type="text" class="form-control">
+                                </div>
+                                <div class="form-group"><label>Subject </label><input formControlName='subject'
+                                        autocomplete="off" type="email" class="form-control">
+                                </div>
+                                <div class="form-group editor"><label>Content </label>
+                                     <!-- <angular-editor formControlName="body" ></angular-editor> -->
+                                    <ckeditor  [editor]="Editor" formControlName="body"></ckeditor>
+                                    <!-- <div [innerHTML]="content"></div> -->
+                                    <!-- <textarea formControlName='body' class="form-control text-area" [innerHTML]="content"></textarea> -->
+                                </div>
+                                <div class="text-right"><button (click)="UpdateEmailTemplate()" type="submit"
+                                        class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

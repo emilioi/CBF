@@ -1,0 +1,274 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <div id="content" class="flex">
+            <div class="p-3">
+                <div class="toolbar"><a [routerLink]="['/member-list']" class="btn btn-sm btn-white i-con-h-a"
+                        data-pjax-state=""><i class="i-con i-con-arrow-left text-muted"><i></i></i> </a> <button
+                        data-toggle="modal" data-target="#content-aside" data-modal=""
+                        class="btn btn-sm btn-white d-md-none"><i class="i-con i-con-nav text-muted"></i></button></div>
+            </div>
+            <div class="page-container" id="page-container">
+                <div class="px-3">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <div class="b-b">
+                                            <div class="p-3">
+                                                <div class="d-flex align-items-center justify-content-around">
+                                                    <div class="avatar mx-2 w-96" style="overflow: hidden; height:96px;"
+                                                        data-pjax-state=""><img
+                                                            src="assets/profile/members/{{userInfo?.image_Url}}?nocache={{cache}}"
+                                                            id="imgTeamLogo" alt="."   *ngIf="!imageSrc" />
+                                                            <img *ngIf="imageSrc" [src]="imageSrc" />
+                                                        <span onclick="$('#inputGroupFile04').click();"
+                                                            class="edit-button">Edit</span>
+                                                    </div>
+
+                                                </div>
+                                                <!--File upload hidden control-->
+                                                <div class="form-group  hidden">
+                                                    <input type="hidden" formControlName="image_Url" />
+                                                    <input type="file" (change)="handleInputChange($event)"
+                                                        id="inputGroupFile04">
+
+                                                </div>
+                                                <div class="text-center mt-3"><a class="h6" data-pjax-state="">
+                                                        {{userInfo?.first_Name}}&nbsp;{{userInfo?.last_Name}}
+                                                    </a> <small
+                                                        class="d-block text-muted mt-2">{{userInfo?.login_Id}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="py-3">
+                                            <ul class="nav flex-column">
+                                                <li *ngIf="userInfo?.reference" class="nav-item"><a
+                                                        class="nav-link i-con-h-a"><i
+                                                            class="i-con i-con-smile"><i></i></i> <span class="mx-2">
+                                                            Referred by: {{userInfo?.reference}} </span></a>
+                                                </li>
+                                                <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                            class="i-con i-con-phone"><i></i></i> <span
+                                                            class="mx-2">{{userInfo?.phone_Number}}</span></a></li>
+
+                                                <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                                                            class="i-con i-con-mail"><i></i></i> <span
+                                                            class="mx-2">{{userInfo?.email_Address}}</span></a></li>
+                                            </ul>
+                                            <form [formGroup]="verifyMemberForm">
+                                                <input type="email" formControlName="member_Id" hidden>
+                                                <div class="pl-3 mb-3"><label class="md-switch"><input
+                                                            formControlName="is_Active" type="checkbox"
+                                                            (change)="isVeriedOnChange()">
+                                                        <i class="blue"></i>Is Verified</label></div>
+
+                                                <!--=======Model Code Start=========-->
+
+                                                <div class="modal fade-color" tabindex="-1" role="dialog"
+                                                    style="display: none"
+                                                    [style.display]="showModal ? 'block' : 'none'">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title h4" id="mySmallModalLabel">Member
+                                                                    Verification</h5>
+                                                                <button type="button" class="close"
+                                                                    (click)="cancelVerify()" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure to change the verification status?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn center btn-secondary"
+                                                                    (click)="updateVerification()"
+                                                                    data-dismiss="modal">Yes</button>
+                                                                <button type="button" class="btn center btn-secondary"
+                                                                    (click)="cancelVerify()"
+                                                                    data-dismiss="modal">NO</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--================Model Code End==============-->
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8 b-l">
+                                        <div class="p-4">
+
+                                            <div class="row pt-3">
+                                                <span class="col-lg-12"><strong>Last login</strong></span>
+                                                <div class="col-lg-12">
+                                                    {{userInfo?.last_Login | date: 'dd/MM/yyyy h:mma'}}
+                                                </div>
+                                            </div>
+                                            <div class="row pt-3">
+                                                <span class="col-lg-12"><strong>Last failed login</strong></span>
+                                                <div class="col-lg-12">
+                                                    {{userInfo?.last_Failed_Login | date: 'dd/MM/yyyy h:mma'}}</div>
+                                            </div>
+                                            <div class="row pt-3">
+                                                <span class="col-lg-6"><u><a style="color: rgb(0, 37, 250);"
+                                                            class="link" (click)="copyMail()">Copy
+                                                            member email to mailing list</a></u></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form novalidate="" autocomplete="bandhaibhai"    [formGroup]="memberReg"
+                                (ngSubmit)="createMember()">
+                                <div class="card">
+                                    <div class="card-header"><strong>Add New Member</strong></div>
+                                    <div class="card-body">
+                                        <p class="text-muted"><label class="required">Required Field</label></p>
+                                        <div class="form-row">
+                                            <input type="hidden" formControlName="member_Id">
+                                            <input type="hidden" formControlName="last_Login">
+                                            <input type="hidden" formControlName="failed_Attempt">
+                                            <input type="hidden" formControlName="last_Failed_Login">
+                                            <input type="hidden" formControlName="is_Email_Verified">
+                                            <input type="hidden" formControlName="is_Locked">
+                                            <input type="hidden" formControlName="is_Active">
+                                            <input type="hidden" formControlName="is_Deleted">
+                                            <input type="hidden" formControlName="last_Edited_By">
+                                            <input type="hidden" formControlName="dts">
+                                            <div class="form-group col-sm-6"><label class="required">Referral Name</label><input type="text" 
+                                                formControlName="reference"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group col-sm-6"></div>
+                                            <div class="form-group col-sm-6"><label class="required">First
+                                                    name</label><input type="text" formControlName='first_Name'
+                                                    class="form-control" id='first_Name' autocomplete="bandhai">
+
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Last
+                                                    name</label><input type="text" formControlName='last_Name'
+                                                    class="form-control" autocomplete="bandhai">
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label class="required">Email</label><input disabled
+                                                type="email" (focusout)="checkEmailExist()"
+                                                formControlName='email_Address' autocomplete="bandhai"
+                                                class="form-control">
+
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6">
+                                                <label class="required">Login Id</label><input disabled type="text"
+                                                    (focusout)="checkloginidExist()" formControlName='login_Id'
+                                                    class="form-control" autocomplete="bandhai">
+                                            </div>
+
+                                            <div class="form-group col-sm-6"><label class="required">Phone
+                                                    Number</label><input type="text" formControlName='phone_Number'
+                                                    class="form-control" autocomplete="doNotAutoComplete">
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group"><label for="inputState" class="text-muted d-block">
+                                                    Member Type
+                                                </label><select class="custom-select" formControlName="user_Type">
+                                                    <option selected="">Select</option>
+                                                    <option selected="Member">Member</option>
+                                                </select></div> -->
+
+                                        <div class="form-group"><label class="">Address</label><input type="text"
+                                                formControlName='address_Line1' class="form-control"
+                                                autocomplete="bandhai">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">City</label><input
+                                                    type="text" formControlName='city' class="form-control"
+                                                    autocomplete="bandhai">
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="">Postal/Zip</label><input
+                                                    type="number" formControlName='zip_Code' class="form-control">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">Country</label>
+                                                <select class="custom-select" formControlName='country'
+                                                    (change)="onCountryChange($event.target.value)">
+                                                    <option *ngFor="let obj of countries" value="{{obj.id}}">
+                                                        {{obj.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="">State</label>
+                                                <select class="custom-select" formControlName='state'>
+                                                    <option *ngFor="let obj of state" value="{{obj.id}}">{{obj.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">Fax Number</label>
+                                                <input type="number" formControlName='fax_Number' class="form-control">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">Business
+                                                    Phone</label>
+                                                <input type="number" formControlName='business_Phone'
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="">Gender</label>
+                                                <select class="custom-select" formControlName="gender">
+                                                    <option value="0">Male</option>
+                                                    <option value="1">Female</option>
+                                                </select></div>
+                                        </div>
+
+
+                                        <div *ngIf='isEditableMode' class="form-row">
+                                            <button type="button" (click)="showPwdInput()"
+                                                class="btn w-sm mb-1 btn-sm btn-primary">Change Password</button>
+                                        </div>
+                                        <div *ngIf='CancelEditableMode' class="form-row">
+                                            <button type="button" (click)="hidePwdInput()"
+                                                class="btn w-sm mb-1 btn-sm btn-secondary">Cancel</button>
+                                        </div>
+                                        <div *ngIf='showPwdInputBtn' class="form-row">
+                                            <div class="form-group col-sm-6"><label
+                                                    class="required">Password</label><input formControlName='password'
+                                                    [type]="show ? 'text' : 'password'" class="form-control password"
+                                                    autocomplete="off">
+                                                <i (click)="Spassword()"
+                                                    class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Re-Enter
+                                                    Password</label><input [type]="show ? 'text' : 'password'"
+                                                    class="form-control password" formControlName='confirm_password'
+                                                    autocomplete="off" data-parsley-equalto="#pwd">
+                                                <i (click)="Spassword()"
+                                                    class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="text-right"><button type="submit" [disabled]='!PermissionCheck()' 
+                                                class="btn btn-primary">Submit</button></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

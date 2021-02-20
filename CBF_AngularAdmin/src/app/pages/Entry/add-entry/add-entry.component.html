@@ -1,0 +1,55 @@
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+
+        <div id="content" class="flex">
+            <div class="p-3">
+                <div class="toolbar"><a [routerLink]="['/entry-list']" class="btn btn-sm btn-white i-con-h-a"
+                        data-pjax-state=""><i class="i-con i-con-arrow-left text-muted"><i></i></i> </a> </div>
+            </div>
+            <div class="page-container" id="page-container">
+                <div class="px-3">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card p-3">
+                                <div class="card-header"><strong>Add New Entry</strong></div>
+                                <div class="card-body">
+                                    <form [formGroup]="entryForm" (ngSubmit)="AddTickets();">
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-12"><label class="required">Select Pool</label>
+                                                <select class="form-control" (change)="selectionChangedPool($event.target.value)"  formControlName="selectPool" >
+                                                        <option *ngFor="let pool of pools" value="{{pool.pool_ID}}">{{pool.pool_Name}}</option>
+                                                </select>
+                                              
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-group col-sm-12"><label class="required">Select Member</label>
+                                                    <ngx-select-dropdown (change)="selectionChangedMember($event)"
+                                                     formControlName="selectMember" [multiple]="false" [config]="config" [options]="MemberList"></ngx-select-dropdown>
+                                                </div>
+                                        </div>
+                                        <div class="form-row" *ngIf="MemberEmail && PoolId">
+                                                <div class="form-group col-sm-12">
+                                                        <label class="required">No Of Tickets</label>
+                                                     <input type="text" formControlName="selectNoOfTickets" class="form-control">
+                                                    </div>
+
+                                        </div> 
+                                        <div class="form-row" *ngIf="MemberEmail && PoolId">
+                                                <div class="form-group col-sm-12">
+                                                    <button type="submit" class="btn btn-success">Add Ticket</button>
+                                                    </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

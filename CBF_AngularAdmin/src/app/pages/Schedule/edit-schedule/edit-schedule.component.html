@@ -1,0 +1,56 @@
+<div id="content" class="flex">
+        <div _ngcontent-erp-c5="" class="p-3 b-b">
+            <div _ngcontent-erp-c5="" class="toolbar"><a _ngcontent-erp-c5="" class="btn btn-sm btn-white i-con-h-a"
+                    data-pjax-state="" title="Back" [routerLink]="['/schedule-list']"><i _ngcontent-erp-c5=""
+                        class="i-con i-con-arrow-left text-muted"><i _ngcontent-erp-c5=""></i></i></a><button
+                    _ngcontent-erp-c5="" class="btn btn-sm btn-white d-md-none" data-modal="" data-target="#content-aside"
+                    data-toggle="modal"><i _ngcontent-erp-c5="" class="i-con i-con-nav text-muted"></i></button></div>
+        </div>
+        <div class="" id="page-container">
+            <div class="p-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form novalidate="" [formGroup]="poolFrm">
+                            <div class="card">
+                                <div class="card-header"><strong>Edit Schedule</strong></div>
+                                <div class="card-body">
+                                    <div class="form-group"><label for="inputState" class="text-muted d-block">Pool
+                                        </label>
+                                        <input type="text" formControlName="pool_Name" class="form-control"
+                                             required="">
+                                    </div>
+                                    <div class="form-group"><label>Week Number</label>
+                                        <select class="custom-select" formControlName="week_Number">
+                                            <option value="{{week}}" *ngFor="let week of weekNumbers">
+                                               Week&nbsp;{{week}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group"><label>Description</label><input type="text"
+                                            formControlName="description" autocomplete="off" class="form-control"
+                                            required=""></div>
+                                    <div class="form-group"><label>Visiting Team</label><select
+                                            formControlName="visitingTeamID" class="custom-select">
+                                            <option selected="selected" value="{{team.team_Id}}" *ngFor="let team of Teams">
+                                                {{team.team_Name}}</option>
+                                        </select></div>
+                                    <div class="form-group"><label>Home Team</label><select formControlName="homeTeamID"
+                                            class="custom-select">
+                                            <option selected="selected" value="{{team.team_Id}}" *ngFor="let team of Teams">
+                                                {{team.team_Name}}</option>
+                                        </select></div>
+                                    <div class="form-group"><label>Winner</label><select formControlName="winnerTeamID"
+                                            class="custom-select">
+                                            <option selected="selected" value="{{team.team_Id}}" *ngFor="let team of Teams">
+                                                {{team.team_Name}}</option>
+                                        </select></div>
+                                    <div class="text-right"><button type="submit" (click)="saveUpdatePoolWeek()"
+                                            class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

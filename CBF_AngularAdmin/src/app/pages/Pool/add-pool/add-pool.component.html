@@ -1,0 +1,115 @@
+<div  [style.display]="!PermissionCheck() ? 'none' : 'block'">
+<div id="content" class="flex">
+    <div _ngcontent-erp-c5="" class="p-3 b-b">
+        <div _ngcontent-erp-c5="" class="toolbar"><a _ngcontent-erp-c5="" class="btn btn-sm btn-white i-con-h-a"
+                data-pjax-state="" title="Back" [routerLink]="['/pool-list']"><i _ngcontent-erp-c5=""
+                    class="i-con i-con-arrow-left text-muted"><i _ngcontent-erp-c5=""></i></i></a><button
+                _ngcontent-erp-c5="" class="btn btn-sm btn-white d-md-none" data-modal="" data-target="#content-aside"
+                data-toggle="modal"><i _ngcontent-erp-c5="" class="i-con i-con-nav text-muted"></i></button></div>
+    </div>
+    <div class="" id="page-container">
+        <div class="p-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form [formGroup]="updatePool">
+                        <div class="card">
+                            <div class="card-header"><strong>Add Pool</strong></div>
+                            <div class="card-body">
+                                <div class="form-group"><label class="required">Pool Name</label><input type="text" class="form-control"
+                                        autocomplete="off" formControlName="pool_Name" required=""></div>
+                                <div class="form-group"><label class="required">Sport
+                                        Type</label>
+                                    <select class="custom-select"  formControlName="sport_Type">
+                                        <!-- <option selected>--Select Sport Type--</option> -->
+                                        <option *ngFor="let sport of sportTypeList"   value="{{sport.sportType}}">
+                                            {{sport.sportTypeName}}</option>
+                                    </select>
+                                </div>
+                                <div  *ngIf="updatePool.value.sport_Type==1"  class="form-group row">
+                                    <div class="col-sm-3">Regular Season?</div>
+                                    <div class="col-sm-9">
+                                        <div class="form-check"><label class="form-check-label"><input type="checkbox"
+                                                    autocomplete="off" class="form-check-input"  
+                                                    formControlName="ruler_Season" required="">(NFL only)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="updatePool.value.sport_Type==1" class="form-group row">
+                                    <div class="col-sm-3">Exclude Thrusday Games?</div>
+                                    <div class="col-sm-9">
+                                        <div class="form-check"><label class="form-check-label"><input type="checkbox"
+                                                    autocomplete="off" class="form-check-input"
+                                                    formControlName="thrusdayGames" required="">Yes</label></div>
+                                    </div>
+                                </div>
+                                <div  *ngIf="updatePool.value.sport_Type==2" class="form-group row">
+                                    <div class="col-sm-3">Include Sunday Games?</div>
+                                    <div class="col-sm-9">
+                                        <div class="form-check"><label class="form-check-label"><input type="checkbox"
+                                                    autocomplete="off" class="form-check-input"
+                                                    formControlName="sundayGames" required="">Yes</label></div>
+                                    </div>
+                                </div>
+                                <div  *ngIf="updatePool.value.sport_Type==1"  class="form-group row">
+                                    <div class="col-sm-3">Exclude Saturday Games?</div>
+                                    <div class="col-sm-9">
+                                        <div class="form-check"><label class="form-check-label"><input type="checkbox"
+                                                    autocomplete="off" class="form-check-input"
+                                                    formControlName="saturdayGames" required="">Yes</label></div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">Private Pool?</div>
+                                    <div class="col-sm-9">
+                                        <div class="form-check"><label class="form-check-label">
+                                            <input type="checkbox" (change)="privatePool()" class="form-check-input" formControlName="private">Yes</label></div>
+                                    </div>
+                                </div>
+                                <div *ngIf="private" class="form-group"><label class="required">Passcode</label><input type="text" class="form-control"
+                                    autocomplete="off" formControlName="passCode"></div>
+
+                                <div class="form-group"><label>Rules URL</label><input type="text" class="form-control"
+                                        autocomplete="off" formControlName="rules_URL"></div>
+                                <div class="form-group " style="display: none"><label class="required">Price </label><input type="text" class="form-control"
+                                        autocomplete="off" formControlName="price" required=""></div>
+                                <div class="form-group" style="position: relative"><label class="required">Cut Off Date (dd/mm/yyyy)</label><input type="text"
+                                        autocomplete="off" class="form-control" formControlName="cut_Off">
+                                        <i class="mr-2 i-con i-con-calendar  glyphicon "><i></i></i>
+                                </div>
+                                <div class="form-group  "  style="display: none"><label>Description</label><input type="text" autocomplete="off"
+                                        class="form-control" formControlName="description" required="">
+                                    </div>
+                                    <div class="form-group">
+                                            <label>Pool Image</label>
+                                            <div class="form-image">
+                                                <img src="/assets/profile/pool/{{currentMemberProfile}}"
+                                                    onerror="this.src='../assets/img/a8.jpg'" id="imgTeamLogo"
+                                                    width="120px" *ngIf="!imageSrc" />
+                                                <img *ngIf="imageSrc" [src]="imageSrc" />
+
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" (change)="handleInputChange($event)"
+                                                    id="inputGroupFile04">
+                                            </div>
+                                        </div>
+                                <div class="form-group"><label class="required">
+                                        Close Pool
+                                    </label>
+                                    <select class="custom-select" formControlName="is_Started">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select><br>(Note: Cannot add more entries if this is true)
+                                </div>
+                                <div class="text-right"><button (click)="savePool()" type="submit"
+                                        class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

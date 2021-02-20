@@ -1,0 +1,125 @@
+<div class="col-sm-12 pt-3">
+    <!-- <div class="row">
+        <h6 class="col-sm-3 pt-1">
+            <a (click)="BackToClubs()" class="btn-back-to-club text-uppercase" title="Back to Club"><span style="font-size: 22px;">
+                    <</span> {{ClubDetail?.pool_Name}}</a> </h6>
+      <div class="col-sm-6">
+                        <div class="row pb-3">
+                            
+                            <div class="col-sm-12">
+                                <button (click)="pickAnalysis(selectedClubId)" class="btn w-sm mb-1 btn-sm btn-primary center">Pick's Report</button>
+                            </div>
+                        </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div> -->
+      <div class="row pt-3 top-navigation-bar">
+        <div class="col-sm-12 ">
+            <a style="float: left;" (click)="BackToClubs()" class=" text-uppercase" title="Back to Club">
+                <span class="back-icon">
+                    <i style="float: left;" class="mr-2 i-con i-con-left left"></i>BACK</span>
+            </a>
+            <span class="center">{{ClubDetail?.pool_Name}}</span>
+           
+        </div>
+    </div>  
+    <app-report-navbar [PoolID]="selectedClubId"  PageName="tickets"></app-report-navbar>
+    <!-- <div class="row pt-3 top-navigation-bar">
+        <div class="col-4 center">
+            <button class="btn   mb-1  center btn-top-toolbar">VIEW
+                TICKETS</button>
+        </div>
+        <div class="col-4  center">
+            <button (click)="pickAnalysis(selectedClubId)" class="btn   mb-1  center  btn-top-toolbar-outline">PICKS</button>
+        </div>
+        <div class="col-4  center">
+            <button  class="btn   mb-1  center  btn-top-toolbar-outline">VIEW
+                DEFAULTS</button>
+        </div>
+
+    </div> -->
+    <div class="row">
+        <!-- <h6 class="col-12">Cut Off: {{ClubDetail?.cut_Off | date}}</h6> -->
+        <!-- <div class="card-columns"> -->
+        <div *ngFor="let obj of Tickets" class="p-2 col-sm-4 col-md-4">
+            <div class="card bg-ticket text-white text-center p-3"
+                [ngClass]="{'defaulted-pick':obj.defaulted,'eliminated-pick':obj.eliminated}">
+                <a (click)="OpenTicket(obj)">
+                    <div class="blockquote mb-0 row">
+                        <div class="pool-ticket-left">
+                            <div class="team-logo-icon" [style.display]="obj.logoImageSrc ? 'none' : 'block'">
+                                <i>!</i>
+                            </div>
+                            <div class="team-logo" [style.display]="obj.logoImageSrc ? 'block' : 'none'"><img
+                                    class="ticket-logo" src="../../../assets/logos/{{obj.logoImageSrc}}"></div>
+                        </div>
+                        <div class="pool-ticket-middle">
+                            <p style="text-align: left; padding-left: 10px;font-size: 15px;">TICKET ID:
+                                <b>{{obj.entryName}}</b></p>
+                            <p style="text-align: left; padding-left: 10px;"><span style="font-size: 15px;">WEEK:
+                                    <b>{{obj?.weekNumber}}</b>&nbsp;</span>(Pool Close
+                                {{obj.cutOffDateString}})</p>
+                            <!-- <p style="text-align: left; padding-left: 10px;"> {{obj.weekClosed ? ' is closed':''}}</p> -->
+                            <p style="text-align: left; padding-left: 10px;font-size: 15px;">PICK:
+                                <b>{{obj.pickName? obj.pickName : "NO PICK"}}</b></p>
+                        </div>
+                        <div class="pool-ticket-right">
+                            <p class="right-arrow">&gt;</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- <div class="toolbar" *ngIf="!IfclosePool">
+    <p>
+        <button type="button" class="btn btn-primary " (click)="AddMoreTickets()">Add
+            More Tickets</button>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <button type="button" class="btn btn-secondary " (click)="ClearTickets()">Clear Tikcets</button>
+    </p>
+</div> -->
+
+
+<!-- Add Tickets-->
+<div class="modal fade-color" tabindex="-1" role="dialog" style="display: block"
+    [style.display]="showModalAddTicket ? 'block' : 'none'">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title center" id="exampleModalLongTitle">TICKETS</h5>
+            </div>
+            <div class="modal-body" [style.display]="ShowticketCreated ? 'none' : 'block'">
+                <!-- <p class="text-center p-0">You have Joined {{selectedClub}}</p>-->
+
+                <p class="text-center p-0">How many tickets would you like?</p>
+                <form>
+                    <div class="row">
+                        <div class="col-md-12 pb-3">
+                            <input type="text" #noOfTickets placeholder="No. of tickets"
+                                class="form-control add-ticket-text">
+                        </div>
+
+                    </div>
+                    <div class="add-ticket-toolbar">
+                        <button type="button" class="btn btn-primary center"
+                            (click)="AddTickets(noOfTickets.value, selectedClubId)">Add
+                            Tickets</button>
+                        <br>
+                        <button type="button" class="btn btn-secondary center" (click)="cancel()">Go
+                            Back</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

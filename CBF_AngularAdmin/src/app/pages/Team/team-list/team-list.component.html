@@ -1,0 +1,81 @@
+<div class="d-flex flex" id="content-body">
+    <div class="d-flex flex-column flex" id="mail-list">
+        <div class="p-3 b-b">
+            <div class="toolbar"> <a [routerLink]="['/add-team']" class="btn btn-sm btn-white i-con-h-a add"
+                    data-sort="item-title" data-toggle="tooltip" title="Add New" data-original-title="Sort"><i
+                        class="i-con i-con-plus text-muted"><i></i></i></a>
+                        <!-- <a
+                    class="btn btn-sm btn-white i-con-h-a sort" data-sort="item-title" data-toggle="tooltip"
+                    title="Sort" data-original-title="Sort"><i class="i-con i-con-sort text-muted"><i></i></i></a> -->
+                <form class="flex">
+                    <div class="input-group"><input type="text" class="form-control form-control-sm search"
+                            placeholder="Search" required="" autocomplete="off"> <span
+                            class="input-group-append"><button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                                type="button"><i class="i-con i-con-search text-muted"></i></button></span></div>
+                </form><button data-toggle="modal" data-target="#content-aside" data-modal=""
+                    class="btn btn-sm btn-white d-md-none i-con-h-a"><i
+                        class="i-con i-con-nav text-muted"><i></i></i></button>
+            </div>
+        </div>
+        <div class="scroll-y">
+
+            <div class="p-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-theme v-middle">
+                            <thead class="text-muted">
+                                <tr>
+                                    <th>&nbsp;&nbsp;&nbsp; Action</th>
+                                    <th>Team ID</th>
+                                    <th>Sport</th>
+                                    <th>Team Name</th>
+                                    <th>Short Name</th>
+                                    <th>Logo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="v-middle" data-id="7" *ngFor='let team of teamName'>
+                                    <td>
+                                        <p><button class="btn btn-sm btn-white i-con-h-a" (click)="delete(team)"
+                                                title="Delete" id="btn-trash" data-original-title="Trash"><i
+                                                    class="i-con i-con-trash text-muted"><i></i></i></button>
+                                            &nbsp;&nbsp;
+                                            <button class="btn btn-sm btn-white i-con-h-a" (click)="editThisTeam(team)"
+                                                title="Edit" id="btn-trash" data-original-title="Trash"><i
+                                                    class="i-con i-con-edit text-muted"><i></i></i></button>
+                                        </p>
+                                    </td>
+                                    <td><a>{{team.team_Id}}</a></td>
+                                    <td>
+                                        {{team.sportTypeName}}
+                                    </td>
+                                    <td>
+                                        {{team.team_Name}}
+                                    </td>
+                                    <td>
+                                        {{team.abbreviation}}
+                                    </td>
+                                    <td><img  title="{{team.team_Name}}" src="/assets/logos/{{team.logoImageSrc}}" onError="this.src='../../../assets/logos/noimgfound.png'" width="20px" /></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="p-3 b-t mt-auto">
+            <div class="d-flex align-items-center">
+                <div class="flex d-flex flex-row"><a href="#" class="btn btn-xs white no-border pager-prev hide"
+                        data-pjax-state=""><i class="fa fa-angle-left"></i></a>
+                    <div class="pagination pagination-xs">
+                        <li class="active"><a class="page" href="javascript:function Z(){Z=&quot;&quot;}Z()">1</a></li>
+                        <li><a class="page" href="javascript:function Z(){Z=&quot;&quot;}Z()">2</a></li>
+                    </div><a href="#" class="btn btn-xs white no-border pager-next hide" data-pjax-state=""><i
+                            class="fa fa-angle-right"></i></a>
+                </div>
+                <div><span class="text-muted">Total:</span> <span id="count">15</span></div>
+            </div>
+        </div> -->
+    </div>
+</div>

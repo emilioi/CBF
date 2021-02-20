@@ -1,0 +1,82 @@
+<div class="page-container" id="page-container">
+    <div class=" p-3">
+        <div class="card">
+            <div class="col-sm-12">
+                <form novalidate="" [formGroup]="moveTktFrom">
+                    <div class="p-2"><strong>Move Ticket</strong></div>
+                    <div class="form-group"><label for="inputState" class="text-muted d-block required">
+                            Pools
+                        </label><select class="custom-select" formControlName="SelectedPool"
+                            (change)="GetTicketByPoolId()">
+                            <option *ngFor='let dd of poolList' value="{{dd.pool_ID}}">
+                                {{dd.pool_Name}}
+                            </option>
+                        </select></div>
+                    <div class="form-row">
+                        <div class="col-sm-4">
+                            <p class="pl-3"><b>Ticket Name/Owner</b></p>
+                            <div class="flex ">
+                                <input type="text" class="form-control" (change)="getTicketbyPool($event.target.value)"
+                                    placeholder="Search by Entry Id">
+                            </div>
+                            <div class="p-3 box-shadow moveticket">
+                                <div class="flex ">
+                                    <ul class="list-group">
+                                        <li *ngFor="let obj of EntryList">
+                                            <label style="word-break: break-all;">
+                                                <input type="radio" name="SelectTicket" formControlName="SelectTicket"
+                                                    value="{{obj?.entryID}}" (change)="onChangeTicket(obj)" />
+                                                {{obj?.entryName}}&nbsp;/&nbsp;{{obj?.login_ID}}
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <!-- <select multiple="multiple" (change)="changeAllMemberSelection($event)" formControlName="SelectTicket"
+                                        class="form-control" style="height: 500px">
+                                        <option *ngFor="let obj of EntryList" value="{{obj?.entryID}}">
+                                            {{obj?.entryName}}&nbsp;/&nbsp;{{obj?.login_ID}}
+                                        </option>
+                                    </select> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="pl-3"><b>Member List</b></p>
+                            <div class="flex ">
+                                <input type="text" class="form-control" (change)="getAllMember($event.target.value)"
+                                    placeholder="Search by Member Name">
+                            </div>
+                            <div class="p-3 box-shadow moveticket">
+                                <div class="flex ">
+                                    <ul class="list-group">
+                                        <li *ngFor="let obj of memberList">
+                                            <label style="word-break: break-all;">
+                                                <input type="radio" name="SelectMember" formControlName="SelectMember"
+                                                    value="{{obj?.member_Id}}" (change)="onChangeMember(obj)" />
+                                                {{obj?.email_Address}}
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group owners-name col-sm-3 pt-5">
+                            <div class="pb-3">
+                                <div class="bg-secondary p-2">
+                                    <p class="m-1"><b>Currect Owner:</b></p>
+                                    <p class="m-1"><b>{{currentOwner?.login_ID}}</b></p>
+                                </div>
+                                <div class="bg-Light p-2">
+                                    <p class="m-1"><b>New Onwer:</b></p>
+                                    <p class="m-1"><b>{{newOwner?.email_Address}}</b></p>
+                                </div>
+                            </div>
+                            <button type="button" (click)="moveTicket()" class="btn btn-primary">Transfer</button>
+                            &nbsp;&nbsp;
+                            <button type="button" (click)="cancelTicket()" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

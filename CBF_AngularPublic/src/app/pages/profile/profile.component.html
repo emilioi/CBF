@@ -1,0 +1,185 @@
+<div id="content" class="flex">
+  <div class="page-container" id="page-container">
+    <div id="content" class="flex block">
+      <div class="page-container" id="page-container">
+        <div class="px-3">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row no-gutters">
+                <div class="col-md-12">
+                  <div class="b-b">
+                    <div class="p-3">
+                      <div class="d-flex align-items-center justify-content-around">
+                        <div class="avatar mx-2 w-96" style="overflow: hidden; height:96px;" data-pjax-state=""><img
+                            src="assets/profile/members/{{userInfo?.image_Url}}?nocache={{cache}}" id="imgTeamLogo"
+                            alt="." *ngIf="!imageSrc" />
+                          <img *ngIf="imageSrc" [src]="imageSrc" />
+                          <span onclick="$('#inputGroupFile04').click();" class="edit-button">Edit</span>
+                        </div>
+                      </div>
+                      <!--File upload hidden control-->
+                      <div class="form-group  hidden">
+                        <input type="hidden"  />
+                        <input type="file" (change)="handleInputChange($event)" id="inputGroupFile04">
+
+                      </div>
+                      <div class="text-center mt-3"><a class="h6" data-pjax-state="">
+                          {{userInfo?.first_Name}}&nbsp;{{userInfo?.last_Name}}
+                        </a> <small class="d-block text-muted mt-2">{{userInfo?.email_Address}}</small>
+                      </div>
+                      <div class="pt-2">
+                        <a class="center" (click)="singout()" data-pjax-state="">Sign out</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="py-3 row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <ul class="nav flex-column">
+                        <li *ngIf="userInfo?.reference" class="nav-item"><a class="nav-link i-con-h-a"><i
+                              class="i-con i-con-smile"><i></i></i> <span class="mx-2">
+                              Agent Name: {{userInfo?.reference}} </span></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                              class="i-con i-con-phone"><i></i></i> <span
+                              class="mx-2">{{userInfo?.phone_Number}}</span></a></li>
+
+                        <li class="nav-item"><a class="nav-link i-con-h-a" data-pjax-state=""><i
+                              class="i-con i-con-mail"><i></i></i> <span
+                              class="mx-2">{{userInfo?.email_Address}} </span><br><br><label class="pointer" style="position: relative; left:20px;">
+                                <input class="form-check-input" [attr.checked]="emailPreference"
+                                       (change)="mailingList($event.target.checked)"
+                                      type="checkbox"> (Subscribe Mailing List)</label></a>
+                            
+                                  
+                           </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-3"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <form [formGroup]="memberReg">
+                <div class="card-header"><strong>Add New Member</strong></div>
+                <div class="card-body">
+                  <p class="text-muted"><label class="required">Required Field</label></p>
+                  <div class="form-row">
+                    <input type="hidden" formControlName="member_Id">
+                    <input type="hidden" formControlName="login_Id">
+                    <input type="hidden" formControlName="password">
+                    <input type="hidden" formControlName="first_Name">
+                    <input type="hidden" formControlName="last_Name">
+                    <input type="hidden" formControlName="phone_Number">
+                    <input type="hidden" formControlName="email_Address">
+                    <input type="hidden" formControlName="address_Line1">
+                    <input type="hidden" formControlName="address_Line2">
+                    <input type="hidden" formControlName="confirm_password">
+                    <input type="hidden" formControlName="city">
+                    <input type="hidden" formControlName="state">
+                    <input type="hidden" formControlName="country">
+                    <input type="hidden" formControlName="zip_Code">
+                    <input type="hidden" formControlName="fax_Number">
+                    <input type="hidden" formControlName="business_Phone">
+                    <input type="hidden" formControlName="gender">
+                    <input type="hidden" formControlName="image_Url">
+                    <input type="hidden" formControlName="last_Login">
+                    <input type="hidden" formControlName="failed_Attempt">
+                    <input type="hidden" formControlName="last_Failed_Login">
+                    <input type="hidden" formControlName="is_Email_Verified">
+                    <input type="hidden" formControlName="is_Temp_Password">
+                    <input type="hidden" formControlName="is_Locked">
+                    <input type="hidden" formControlName="is_Active">
+                    <input type="hidden" formControlName="is_Deleted">
+                    <input type="hidden" formControlName="last_Edited_By">
+                    <input type="hidden" formControlName="reference">
+                    <input type="hidden" formControlName="dts">
+                    <div class="form-group col-sm-6"><label class="required">First
+                        name</label><input type="text" formControlName='first_Name' class="form-control" id='first_Name'
+                        autocomplete="bandhai">
+                    </div>
+                    <div class="form-group col-sm-6"><label class="required">Last
+                        name</label><input type="text" formControlName='last_Name' class="form-control"
+                        autocomplete="bandhai">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-sm-6"><label class="required">Phone
+                        Number</label><input type="text" formControlName='phone_Number' class="form-control"
+                        autocomplete="doNotAutoComplete">
+                    </div>
+                    <div class="form-group col-sm-6"><label class="">Business
+                        Phone</label>
+                      <input type="number" formControlName='business_Phone' class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group"><label class="">Address</label><input type="text"
+                      formControlName='address_Line1' class="form-control" autocomplete="bandhai">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-sm-6"><label class="">City</label><input type="text"
+                        formControlName='city' class="form-control" autocomplete="bandhai">
+                    </div>
+                    <div class="form-group col-sm-6"><label class="">Postal/Zip</label><input type="number"
+                        formControlName='zip_Code' class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-sm-6"><label class="">Country</label>
+                      <select class="custom-select" formControlName='country'
+                        (change)="onCountryChange($event.target.value)">
+                        <option *ngFor="let obj of countries" value="{{obj.id}}">
+                          {{obj.name}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group col-sm-6"><label class="">State</label>
+                      <select class="custom-select" formControlName='state'>
+                        <option *ngFor="let obj of state" value="{{obj.id}}">{{obj.name}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-sm-6"><label class="">Fax Number</label>
+                      <input type="number" formControlName='fax_Number' class="form-control">
+                    </div>
+                    <div class="form-group col-sm-6"><label class="">Gender</label>
+                      <select class="custom-select" formControlName="gender">
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                      </select></div>
+                  </div>
+                  <div *ngIf='isEditableMode' class="form-row">
+                    <button type="button" (click)="showPwdInput()" class="btn w-sm mb-1 btn-sm btn-success">Change
+                      Password</button>
+                  </div>
+                  <div *ngIf='showPwdInputBtn' class="form-row">
+                    <div class="form-group col-sm-6"><label class="required">Password</label><input
+                        formControlName='password' [type]="show ? 'text' : 'password'" class="form-control password"
+                        autocomplete="off">
+                      <i (click)="Spassword()" class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                    </div>
+                    <div class="form-group col-sm-6"><label class="required">Re-Enter
+                        Password</label><input [type]="show ? 'text' : 'password'" class="form-control password"
+                        formControlName='confirm_password' autocomplete="off" data-parsley-equalto="#pwd">
+                      <i (click)="Spassword()" class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                    </div>
+                  </div>
+                  <div *ngIf='CancelEditableMode' class="form-row">
+                    <button type="button" (click)="hidePwdInput()"
+                      class="btn w-sm mb-1 btn-sm btn-secondary">Cancel</button>
+                  </div>
+                  <div class="text-right"><button type="submit" (click)="createMember()" class="btn btn-primary">Update</button></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

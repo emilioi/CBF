@@ -1,0 +1,49 @@
+<div class="d-flex flex-column flex">
+  <div>
+    <div class="p-3 p-md-5">
+      <div class="card p-0 col-lg-8 offset-lg-2">
+        <div class="row no-gutters">
+          <div class="col-md-6 r-l" style="background-color: #e1efff !important;">
+            <div class="p-4 d-flex flex-column">
+              <div class="d-flex flex align-items-center pt-5 justify-content-center">
+                <div class="animate pt-3 fadeIn">
+                  <img src="assets/CBF_logo.svg" alt="...">
+                  
+                  <h4 class="mb-3 text-black">CLUB BIG FUN</h4>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6" id="content-body">
+            <div class="p-4">
+              <h5>Login into Club Big Fun</h5>
+              <div class="text-error">{{LoginMessage}}</div>
+              <form [formGroup]="loginForm">
+                <div class="form-group">
+                  <label>User Id</label>
+                  <input type="email" autocomplete="off" formControlName="email_Address" name="email" class="form-control"
+                    placeholder="User Id">
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" autocomplete="off" formControlName="password" name="password" class="form-control"
+                    placeholder="Password">
+                  <div class="my-3 text-right"><a [routerLink]="['/forgot-password']" class="text-muted">Forgot password?</a></div>
+                </div>
+                <div class="checkbox mb-3">
+                  <label class="ui-check">
+                   
+                  </label>
+                </div> 
+                <button type="submit" class="btn btn-primary mb-4" (click)="signin()">Sign in</button>
+                <!-- <div>Do not have an account? <a href="/signup" class="text-primary">Sign up</a></div> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

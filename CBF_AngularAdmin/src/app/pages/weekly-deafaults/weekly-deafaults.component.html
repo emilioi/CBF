@@ -1,0 +1,208 @@
+<div id="content" class="flex">
+  <div class="d-flex flex h-100">
+    <div class="fade aside aside-sm" id="content-aside">
+      <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+        <div class="navbar">
+          <span class="text-md">Set Weekly Defaults</span>
+          <div class="dropdown dropright">
+            <div class="dropdown-menu w-lg">
+              <div class="p-3">
+                <!-- <div class="input-group"><input type="text" class="form-control form-control-sm"
+                                        id="newField" placeholder="Group name" required=""> <span
+                                        class="input-group-append"><button
+                                            class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"
+                                            id="newBtn"><i class="i-con i-con-ok"></i></button></span></div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <div class="sidenav mt-2">
+            <nav class="nav-active-text-primary" data-nav="">
+              <ul class="nav">
+                <li *ngFor="let menu of menus">
+                  <a data-pjax-state=""
+                    ><span class="nav-text" (click)="selectedWeek(menu)">{{
+                      menu?.pool_Name
+                    }}</span>
+                    <span class="nav-badge"
+                      ><b class="badge badge-sm badge-pill bg-secondary">{{
+                        menu?.theCount
+                      }}</b></span
+                    >
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex" id="content-body">
+      <div class="d-flex flex-column flex" id="user-list">
+        <div class="p-3">
+          <div class="toolbar">
+            <h5 class="Primary">{{ pooName }}</h5>
+            <!-- <form class="flex">
+                            <div class="input-group"><input type="text" class="form-control form-control-sm search"
+                                    placeholder="Search" required=""> <span class="input-group-append"><button
+                                        class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                                            class="i-con i-con-search text-muted"></i></button></span></div>
+                        </form><button data-toggle="modal" data-target="#content-aside" data-modal=""
+                            class="btn btn-sm btn-white d-md-none i-con-h-a"><i
+                                class="i-con i-con-nav text-muted"><i></i></i></button> -->
+          </div>
+        </div>
+
+        <div *ngIf="show" class="d-block pl-3 pr-3">
+          <div class="">
+            <div class="scroll-y">
+              <div class="card">
+                <div class="scroll-y">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="nav-active-border b-primary bottom">
+                          <ul class="nav" id="myTab" role="tablist">
+                            <li
+                              class="nav-item"
+                              *ngFor="let obj of Weeks; let index = index"
+                            >
+                              <a
+                                class="nav-link"
+                                id="home-tab"
+                                data-toggle="tab"
+                                (click)="getNFLDataByWeek(obj)"
+                                role="tab"
+                                aria-controls="home"
+                                aria-selected="false"
+                                >Week {{ obj }}</a
+                              >
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex px-3">
+          <div class="d-flex flex-column flex">
+            <div class="scroll-y">
+              <div class="row">
+                <div class="col-md-10">
+                  <h5 class="Primary" *ngIf="weekNumberText !== 'Week 0'">
+                    {{ weekNumberText }}
+                  </h5>
+                </div>
+                <div class="col-md-2" style="padding-bottom: 5px;">
+                  <input
+                    style="float: right;"
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="SaveAllWeeklyDefaults()"
+                    value="Update"
+                  />
+                </div>
+              </div>
+              <div class="clearfix clear"></div>
+              <div class="card">
+                <div class="scroll-y">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <ngx-sortable
+                          [items]="scheduleList"
+                          [listStyle]="listStyle"
+                          [name]="'Favoured'"
+                          (listSorted)="listSorted($event)"
+                        >
+                          <ng-template let-item>
+                            <div class="sortable-list-item">
+                              <div class=" match-hover shadow row">
+                                <div class="Home-Team col-lg-5">
+                                  <div class="team-name">
+                                    {{ item.homeTeamName }}
+                                  </div>
+                                  <img
+                                    title="{{ item.homeTeamName }}"
+                                    src="../../../assets/logos/{{
+                                      item.homeLogoImageSrc
+                                    }}"
+                                    onError="this.src='../../../assets/logos/noimgfound.png'"
+                                  />
+                                </div>
+                                <div class="versus  col-lg-2">
+                                  <h6>VS</h6>
+                                </div>
+                                <div class="Visiting-Team  col-lg-5">
+                                  <div class="team-name">
+                                    {{ item.visitingTeamName }}
+                                  </div>
+                                  <img
+                                    title="{{ item.visitingTeamName }}"
+                                    onError="this.src='../../../assets/logos/noimgfound.png'"
+                                    src="../../../assets/logos/{{
+                                      item.visitingLogoImageSrc
+                                    }}"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </ngx-sortable>
+                        <!--  <table class="table table-theme v-middle">
+                                                    <thead class="text-muted">
+                                                        <tr>
+                                                            <th  style="width: 196px; text-align: center">&nbsp;&nbsp;&nbsp; Favoured Index</th>
+                                                           
+                                                            <th>Schedules</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="v-middle" data-id="7"
+                                                            *ngFor="let poolList of scheduleList; let index=index">
+                                                            <td style="width: 196px; text-align: center">
+                                                               {{index+1}}
+                                                            </td>
+                                                            <td><a href="#">{{poolList.scheduleID}}</a></td>
+                                                           <td>
+                                                                {{poolList.pool_Name}}
+                                                            </td>
+                                                            <td>
+                                                                {{poolList.weekNumber}}
+                                                            </td>
+                                                            <td>
+                                                                {{poolList.description}}
+                                                            </td>
+                                                            <td>
+                                                                {{poolList.visitingTeamName}}
+                                                            </td>
+                                                            <td>
+                                                                {{poolList.homeTeamName}}
+                                                            </td>
+                                                            <td>
+                                                                {{poolList.winnerTeamName}}
+                                                            </td> 
+                                                        </tr>
+                                                    </tbody>
+                                                </table>-->
+                        <!-- <pagination-controls (pageChange)="pageChange($event)"
+                                                    class="my-pagination">
+                                                </pagination-controls> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

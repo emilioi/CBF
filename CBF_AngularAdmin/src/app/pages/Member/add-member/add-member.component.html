@@ -1,0 +1,197 @@
+<div  [style.display]="!PermissionCheck() ? 'none' : 'block'">
+<div id="content" class="flex">
+    <div class="d-flex flex h-100">
+        <!-- <div class="fade aside aside-sm" id="content-aside">
+            <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+                <div class="navbar"><span class="text-md">Members</span>
+                </div>
+                <div class="">
+                    <div class="sidenav mt-2">
+                        <nav class="nav-active-text-primary" data-nav="">
+                            <ul class="nav">
+                                <li><a [routerLink]="['/member-list']" data-pjax-state=""><span
+                                            class="nav-text">All</span> <span class="nav-badge"><b
+                                                class="badge badge-sm badge-pill bg-primary">{{ memberlist?.length}}</b></span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div id="content" class="flex">
+            <div class="p-3">
+                <div class="toolbar"><a [routerLink]="['/member-list']" class="btn btn-sm btn-white i-con-h-a"
+                        data-pjax-state=""><i class="i-con i-con-arrow-left text-muted"><i></i></i> </a> <button
+                        data-toggle="modal" data-target="#content-aside" data-modal=""
+                        class="btn btn-sm btn-white d-md-none"><i class="i-con i-con-nav text-muted"></i></button></div>
+            </div>
+            <div class="page-container" id="page-container">
+                <div class="px-3">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form novalidate="" autocomplete="bandhaibhai" [formGroup]="memberReg"
+                                (ngSubmit)="createMember()">
+                                <div class="card">
+                                    <div class="card-header"><strong>Add New Member</strong></div>
+                                    <div class="card-body">
+                                        <p class="text-muted"><label class="required">Required Field</label></p>
+                                        <div class="form-row">
+                                        <div class="form-group col-sm-6"><label class="required">Referral
+                                                Name</label><input type="text" formControlName="reference"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group col-sm-6"></div>
+                                        </div>
+                                        <div class="form-row">
+                                            <input type="text" formControlName="member_Id" hidden>
+                                            <div class="form-group col-sm-6"><label class="required">First
+                                                    name</label><input type="text" formControlName='first_Name'
+                                                    class="form-control" id='first_Name' autocomplete="bandhai">
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Last
+                                                    name</label><input type="text" formControlName='last_Name'
+                                                    class="form-control" autocomplete="bandhai">
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label class="required">Email</label><input type="email"
+                                                id="name" (focusout)="checkEmailExist()"
+                                                onkeyup='jQuery(".login").val(this.value)'
+                                                formControlName='email_Address' autocomplete="bandhai"
+                                                class="form-control">
+                                            <div *ngIf='isEmailExist'>
+                                                <span style="color:red">Email address already exist</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6">
+                                                <label class="required">Login Id</label><input type="text" id="login"
+                                                    (focusout)="checkloginidExist()" formControlName='login_Id'
+                                                    class="form-control login" autocomplete="bandhai">
+                                                <div *ngIf='isUserNameExist'>
+                                                    <span style="color:red">Login id already exist</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Phone
+                                                    Number</label><input type="text" formControlName='phone_Number'
+                                                    class="form-control" autocomplete="doNotAutoComplete">
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group"><label for="inputState" class="text-muted d-block">
+                                                Member Type
+                                            </label><select class="custom-select" formControlName="user_Type">
+                                                <option selected="">Select</option>
+                                                <option selected="Member">Member</option>
+                                            </select></div> -->
+
+                                        <div class="form-group"><label class="">Address</label><input type="text"
+                                                formControlName='address_Line1' class="form-control"
+                                                autocomplete="bandhai">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">City</label><input
+                                                    type="text" formControlName='city' class="form-control"
+                                                    autocomplete="bandhai">
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="">Postal/Zip</label><input
+                                                    type="number" formControlName='zip_Code' class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">Country</label>
+                                                <select class="custom-select" formControlName='country'
+                                                    (change)="onCountryChange($event.target.value)">
+                                                    <option *ngFor="let obj of countries" value="{{obj.id}}">
+                                                        {{obj.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="">State</label>
+                                                <select class="custom-select" formControlName='state'>
+                                                    <option *ngFor="let obj of state" value="{{obj.id}}">{{obj.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">Fax Number</label>
+                                                <input type="number" formControlName='fax_Number' class="form-control">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label class="">Business
+                                                    Phone</label>
+                                                <input type="number" formControlName='business_Phone'
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="">Gender</label>
+                                                <select class="custom-select" formControlName="gender">
+                                                    <option value="0">Male</option>
+                                                    <option value="1">Female</option>
+                                                </select></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Profile pic</label>
+                                            <div class="form-image">
+                                                <img src="/assets/logos/{{currentMemberProfile}}"
+                                                    onerror="this.src='../assets/img/a8.jpg'" id="imgTeamLogo"
+                                                    width="120px" *ngIf="!imageSrc" />
+                                                <img *ngIf="imageSrc" [src]="imageSrc" />
+
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" (change)="handleInputChange($event)"
+                                                    id="inputGroupFile04">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-6"><label
+                                                    class="required">Password</label><input formControlName='password'
+                                                    [type]="show ? 'text' : 'password'" class="form-control password"
+                                                    autocomplete="off">
+                                                <i (click)="password()" class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Re-Enter
+                                                    Password</label><input [type]="show ? 'text' : 'password'"
+                                                    class="form-control password" formControlName='confirm_password'
+                                                    autocomplete="off" data-parsley-equalto="#pwd">
+                                                <i (click)="password()" class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                                            </div>
+                                        </div>
+                                        <!-- <div *ngIf='isEditableMode' class="form-row">
+                                            <button type="button" (click)="showPwdInput()"
+                                                class="btn w-sm mb-1 btn-sm btn-primary">Change Password</button>
+                                        </div>
+                                        <div *ngIf='CancelEditableMode' class="form-row">
+                                            <button type="button" (click)="hidePwdInput()"
+                                                class="btn w-sm mb-1 btn-sm btn-secondary">Cancel</button>
+                                        </div>
+                                        <div *ngIf='showPwdInputBtn' class="form-row">
+                                            <div class="form-group col-sm-6"><label
+                                                    class="required">Password</label><input formControlName='password'
+                                                    type="password" class="form-control password" autocomplete="off">
+                                                    <i class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label class="required">Re-Enter
+                                                    Password</label><input type="password" class="form-control password"
+                                                    formControlName='confirm_password' autocomplete="off"
+                                                    data-parsley-equalto="#pwd">
+                                                    <i class="mr-2 i-con i-con-eye  pwd glyphicon"></i>
+                                            </div>
+                                        </div> -->
+                                        <div class="text-right"><button type="submit"
+                                                class="btn btn-primary">Submit</button></div>
+                                        <!-- [disabled]="!memberReg.valid || submitted" -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,20 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red !important;
+}
+
+input.ng-valid.ng-touched {
+    border: 1px solid green !important;
+}
+
+.invalid-feedback {
+    color: red
+}
+
+// .ng-valid,
+// .ng-valid.required {
+//     background-color: lightgreen;
+// }
+
+// .ng-invalid:not(form) {
+//     background-color: lightcoral;
+// }

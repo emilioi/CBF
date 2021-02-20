@@ -1,0 +1,123 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>CBF Admin</title>
+  <meta name="description" content="Responsive, Bootstrap, BS4">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <base href="/">
+  <!-- style -->
+  <link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/i-con.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/theme.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+  <script>tinymce.init({ selector: 'textarea.tinyText' });</script> -->
+  <base href="./">
+  <!-- endbuild -->
+  <style type="text/css">
+  body{
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+    /* Chart.js */
+    @-webkit-keyframes chartjs-render-animation {
+      from {
+        opacity: 0.99
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes chartjs-render-animation {
+      from {
+        opacity: 0.99
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .chartjs-render-monitor {
+      -webkit-animation: chartjs-render-animation 0.001s;
+      animation: chartjs-render-animation 0.001s;
+    }
+  </style>
+
+</head>
+
+<body class="layout-column  pace-done" data-class="">
+  <div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99"
+      style="transform: translate3d(100%, 0px, 0px);">
+      <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+  </div>
+  <app-root></app-root>
+  <!-- Bootstrap -->
+  <!-- <script src="assets/libs/jquery/dist/jquery.min.js"></script> -->
+
+  <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+  <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- ajax page -->
+  <!-- lazyload plugin -->
+  <script src="assets/js/lazyload.config.js"></script>
+  <script src="assets/js/lazyload.js"></script>
+  <script src="assets/js/plugin.js"></script>
+  <!-- theme -->
+  <script src="assets/js/theme.js"></script>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script>
+    try {
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#imgTeamLogo').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      $(function () {
+
+        $("#inputGroupFile04").change(function () {
+          readURL(this);
+        });
+      });
+    }
+    catch (e) { console.log(e); }
+    $(function () {
+      $(".calendar").datepicker({ dateFormat: 'dd/mm/yy' });
+
+
+      $('.pwd.glyphicon').on('click', function () {
+        //  $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
+       if($('.password').attr('type') == 'password')
+       {
+        $('.password').attr('type','text');
+       } 
+       else{
+        $('.password').attr('type','password');
+       }
+      });
+    });
+  </script>
+<script type="text/javascript">
+  setInterval(function()
+  {
+      $(".calendar").datepicker({ dateFormat: 'dd/mm/yy' });
+  },500);
+  </script>
+</body>
+
+</html>

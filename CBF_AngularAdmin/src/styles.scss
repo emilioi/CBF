@@ -1,0 +1,72 @@
+/* You can add global styles to this file, and also import other style files */
+.text-area{
+    height: 400px !important;
+}
+tr.v-middle td, .v-middle th {
+    padding: 6px !important;
+    font-size: 14px;
+}
+tr.v-middle td p{
+    margin-bottom:0px !important
+    
+}
+label.required:before {
+    content: "*";
+    color: red;
+}
+.center
+{
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+.fade-color {
+    background: #8686868a;
+}
+.ngx-overlay {
+    display: none !important;
+}
+
+.ngx-background-spinner {
+    display: none !important;
+}
+.avatar-status  {
+  display: none !important
+}
+.loading:after {
+    border-left-color: #fffafa00 !important;
+    animation: none !important;
+}
+
+i.glyphicon {
+    position: absolute;
+    right: 4px;
+    top: 39px;
+}
+
+label.form-check-label, .form-check-input {
+    cursor: pointer;
+}
+label.pointer{
+    cursor: pointer;
+}
+
+.edit-button {
+    position: absolute;
+    display: none;
+    bottom: -4px;
+    cursor: pointer;
+    width: 100%;
+    background: #666;
+    height: 30px;
+    color: #fff;
+    text-align: center;
+    opacity: 0.5;
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+.avatar:hover .edit-button {
+    display: block;
+}

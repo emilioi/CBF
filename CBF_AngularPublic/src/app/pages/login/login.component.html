@@ -1,0 +1,65 @@
+<div class="d-flex flex-column flex" *ngIf='IsMaintenanceOn == "false"'>
+  <div>
+    <div class="pt-3 p-md-6 d-flex justify-content-center">
+      <div class="card p-0 col-lg-3">
+        <div class="row no-gutters">
+          <div class="col-md-12" id="content-body">
+            <div class="p-4 d-flex flex-column">
+              <div class="d-flex flex align-items-center justify-content-center">
+                <div class="animate pt-5 fadeIn">
+                  <img src="assets/CBF_logo.svg" alt="...">
+                  <h4 class="mb-3 text-black">CLUB BIG FUN</h4>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 pt-0">
+              <div class="text-error">{{LoginMessage}}</div>
+              <form [formGroup]="loginForm">
+                <div class="form-group">
+                  <input type="email" formControlName="email_Address" name="email" class="form-control required"
+                    placeholder="Email Address">
+                </div>
+                <div class="form-group">
+                  <input type="password" formControlName="password" name="password" class="form-control required"
+                    placeholder="Password">
+
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-block btn-primary" (click)="signin()">Sign in</button>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <div class="my-3 text-right"><a [routerLink]="['/forgot-password']" class="text-primary">Forgot
+                      password?</a></div>
+                </div>
+                <div *ngIf="IsPublicRegistrationOpen == true" class="pb-4 d-flex justify-content-center">OR</div>
+                <div *ngIf="IsPublicRegistrationOpen == false" class="d-flex justify-content-center "
+                  style="margin-top:10px;">
+                  <h4>Registration has been closed.</h4>
+                </div>
+                <div *ngIf="IsPublicRegistrationOpen == true" class="d-flex justify-content-center"><button
+                    class="btn btn-block btn-outline-primary" [routerLink]="['/signup']">Register</button></div>
+                <div class="d-flex justify-content-center " style="margin-top:10px;">
+                  <p>Click <a href="http://support.clubbigfun.com/">Support</a> for help</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex col-md-12" *ngIf="IsMaintenanceOn == 'true'">
+  <div class="pt-5 row" style="margin: 0 auto;">
+          <div class=" col-md-12">
+           <div class="p-3">
+            <div style="font-size: 18px;">
+              <div style="padding-bottom: 30px; color: black; line-height: 30px;">
+                <img style='margin: 0 auto; display: block' src='https://admin.clubbigfun.com/assets/CBF_logo.svg'>
+              </div>
+              <div [innerHTML]="MaintenanceText"></div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

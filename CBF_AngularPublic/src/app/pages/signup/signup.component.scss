@@ -1,0 +1,45 @@
+.logo-text {
+    float: left;
+    width: 20%;
+}
+.logo-text-ctr{
+    float: left;
+    width: 59%;
+    line-height: 32px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(3rem + 2px);
+    border: 2px solid #ddd;
+    font-size: 20px;
+}
+.text-black {
+    text-align: center;
+}
+label, p {
+    font-size: 18px;
+}
+.logo-text .img-right {
+    float: right;
+}
+button {
+    height: 44px;
+}
+.btn-secondary{
+    float: left;
+}
+.btn-primary{
+    float: right;
+}
+.ftn{
+    float: none;
+    margin: auto;
+    display: block;
+}
+img.ticket-img.ftn {
+    width: 120px;
+}
+body {
+    background: #ffffff !important;
+}

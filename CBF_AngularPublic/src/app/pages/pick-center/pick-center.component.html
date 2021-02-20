@@ -1,0 +1,297 @@
+<div class="col-12">
+  <div class="card">
+    <div class="row pt-3 top-navigation-bar">
+      <div class="col-sm-12 ">
+        <a
+          style="float: left;"
+          (click)="backToTIckets(Entry.poolID)"
+          title="Back to Tickets"
+        >
+          <span class="back-icon">
+            <i style="float: left;" class="mr-2 i-con i-con-left left"></i
+            >BACK</span
+          ></a
+        >
+      </div>
+    </div>
+    <div class="b-b">
+      <div class="row m-0 p-0">
+        <div class="col-md-12">
+          <div class="nav-active-border b-primary bottom">
+            <ul class="nav scroll-tab" id="myTab" role="tablist">
+              <li
+                class="nav-item week"
+                *ngFor="let obj of Weeks; let index = index"
+              >
+                <a
+                  class="nav-link link"
+                  id="home-tab"
+                  [class.active]="obj.weekNumber == weekNumber"
+                  data-toggle="tab"
+                  (click)="getSchedules(obj.poolID, obj.weekNumber, obj)"
+                  role="tab"
+                  aria-controls="home"
+                  aria-selected="false"
+                  >Week {{ obj.weekNumber }}</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content p-3" *ngIf="NotLoading">
+      <!-- Current Pick start-->
+      <div
+        class="tab-pane  fade active show"
+        style="display: none; margin: 0 auto"
+        [style.display]="ShowCurrentPick || WeekClose ? 'block' : 'none'"
+      >
+        <div class="row pb-3 text-center">
+          <div class="schedules col-md-3   pb-3">
+            <h5
+              style="display: none; margin: 0 auto"
+              [style.display]="!WeekClose ? 'block' : 'none'"
+            >
+              {{ currentPickedSchedule?.description }}
+            </h5>
+            <h5
+              style="display: none; margin: 0 auto"
+              class="lock"
+              [style.display]="!WeekClose ? 'none' : 'block'"
+            >
+              <i class="mr-2 i-con i-con-lock"><i></i></i> This week is closed.
+            </h5>
+            <p>You have choosen the</p>
+
+            <h4 *ngIf="currentPickedSchedule?.homeTeam == CurrentPick?.winner">
+              {{ currentPickedSchedule?.homeTeamName }}
+            </h4>
+            <h4
+              *ngIf="currentPickedSchedule?.visitingTeam == CurrentPick?.winner"
+            >
+              {{ currentPickedSchedule?.visitingTeamName }}
+            </h4>
+            <div class="block match-hover">
+              <div
+                class="Visiting-Team shadow"
+                [style.opacity]="
+                  currentPickedSchedule?.visitingTeam == CurrentPick?.winner
+                    ? '1'
+                    : '0.2'
+                "
+              >
+                <img
+                  title="{{ currentPickedSchedule?.visitingTeamName }}"
+                  onError="this.src='../../../assets/logos/noimgfound.png'"
+                  src="../../../assets/logos/{{
+                    currentPickedSchedule?.visitingLogoImageSrc
+                  }}"
+                />
+              </div>
+
+              <div class="versus">
+                <h6>AT</h6>
+              </div>
+              <div
+                class="Home-Team shadow"
+                [style.opacity]="
+                  currentPickedSchedule?.homeTeam == CurrentPick?.winner
+                    ? '1'
+                    : '0.2'
+                "
+              >
+                <img
+                  title="{{ currentPickedSchedule?.homeTeamName }}"
+                  src="../../../assets/logos/{{
+                    currentPickedSchedule?.homeLogoImageSrc
+                  }}"
+                  onError="this.src='../../../assets/logos/noimgfound.png'"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="row pb-3 text-center"
+          style="display: none; margin: 0 auto"
+          [style.display]="!WeekClose ? 'block' : 'none'"
+        >
+          <div class="schedules col-md-3   pb-3">
+            <button (click)="ChangePick()" class="btn btn-primary btn-block">
+              Change Pick
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Current Pick End /-->
+      <!-- All Schedules start-->
+      <div
+        class="tab-pane fade active show"
+        id="Week1"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+        style="display: block"
+        [style.display]="ShowCurrentPick || WeekClose ? 'none' : 'block'"
+      >
+        <div class="row">
+          <div *ngFor="let date of Schedules" class="col-12">
+            <div class="row">
+              <div class="col-md-12">
+                <h5 class="text-center date-heading">
+                  {{ date.scheduleDateString }}
+                </h5>
+              </div>
+            </div>
+            <div
+              class="schedule-times row pb-3"
+              *ngFor="let time of date.scheduleGroupTime"
+            >
+              <div class="col-md-12 ">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h6 class="text-center time-heading">
+                      Time: {{ time.scheduleTimeString }}
+                    </h6>
+                  </div>
+                </div>
+                <div class="row pb-3">
+                  <div
+                    class="schedules col-md-3   pb-3"
+                    *ngFor="let schedule of time.scheduleWeekLists"
+                  >
+                    <div class="block match-hover">
+                      <div
+                        class="Visiting-Team shadow"
+                        (click)="
+                          MakePick(schedule, schedule.visitingTeam, false)
+                        "
+                        [ngClass]="
+                          setMyStyles(schedule, schedule.visitingTeam, false)
+                        "
+                      >
+                        <img
+                          title="{{ schedule.visitingTeamName }}"
+                          onError="this.src='../../../assets/logos/noimgfound.png'"
+                          src="../../../assets/logos/{{
+                            schedule.visitingLogoImageSrc
+                          }}"
+                        />
+                      </div>
+
+                      <div class="versus">
+                        <h6>AT</h6>
+                      </div>
+                      <div
+                        class="Home-Team shadow"
+                        (click)="MakePick(schedule, schedule.homeTeam, true)"
+                        [ngClass]="
+                          setMyStyles(schedule, schedule.homeTeam, true)
+                        "
+                      >
+                        <img
+                          title="{{ schedule.homeTeamName }}"
+                          src="../../../assets/logos/{{
+                            schedule.homeLogoImageSrc
+                          }}"
+                          onError="this.src='../../../assets/logos/noimgfound.png'"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- All Schedules start /-->
+
+      <!-- Pick Summary Start-->
+      <div
+        class="tab-pane  fade active show"
+        style="display: none"
+        [style.display]="ShowCurrentPick ? 'block' : 'none'"
+      >
+        <h5 class=" pb-3 text-center">Your Pick</h5>
+        <div class="row pb-3">
+          <div
+            class="col-4  pb-3 text-center"
+            *ngFor="let obj of LogoWeeks; let index = index"
+          >
+            <img
+              src="../../../assets/logos/{{ obj.logoImageSrc }}"
+              onError="this.src='../../../assets/logos/noimgfound.png'"
+              height="45px"
+              width="45px"
+            />
+            <div>Week {{ obj.weekNumber }}</div>
+          </div>
+        </div>
+      </div>
+      <!-- Pick Summary Ends /-->
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade-color"
+  tabindex="-1"
+  role="dialog"
+  style="display: block"
+  [style.display]="showModal ? 'block' : 'none'"
+>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <h5 class="modal-title center" id="exampleModalLongTitle">Congrats</h5>
+      </div> -->
+      <div class="modal-body">
+        <h5 class="text-center p-0">
+          WEEK {{ currentSchedule?.weekNumber }} Selection
+        </h5>
+        <h5 class="text-center">Ticket# {{ entryId }}</h5>
+        <p class="text-center p-0">You have choosen the</p>
+        <h5 class="text-center">{{ teamname }}</h5>
+        <p class="text-center p-0">
+          You cannot use the {{ teamname }} for the rest of the season for
+          {{ entryId }}.
+        </p>
+        <div class="row">
+          <div class="col-md-12 pb-3 b">
+            <div class="b-1">
+              <img
+                class="ticket-img center"
+                src="../../../assets/logos/{{ logurl }}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="add-ticket-toolbar">
+        <div class="row">
+          <div class="col-md-12 pb-3">
+            <button
+              type="button"
+              class="btn btn-primary center"
+              (click)="ConfirmPick()"
+            >
+              Confirm this pick
+            </button>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-md-12 pb-3">
+            <button
+              type="button"
+              class="btn btn-secondary center"
+              (click)="cancelAction()"
+            >
+              Cancel this pick
+            </button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

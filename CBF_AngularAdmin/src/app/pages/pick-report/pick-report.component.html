@@ -1,0 +1,403 @@
+<div id="content" class="flex">
+  <div class="d-flex flex h-100">
+    <div class="fade aside aside-sm" id="content-aside">
+      <div class="modal-dialog d-flex flex-column w-md bg-body" id="user-nav">
+        <div class="navbar">
+          <span class="text-md">Pick Report</span>
+          <div class="dropdown dropright">
+            <div class="dropdown-menu w-lg">
+              <div class="p-3">
+                <div class="input-group">
+                  <input type="text" class="form-control form-control-sm" id="newField" placeholder="Group name"
+                    required="" />
+                  <span class="input-group-append"><button class="btn btn-white no-shadow btn-sm i-con-h-a"
+                      type="button" id="newBtn">
+                      <i class="i-con i-con-ok"></i></button></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <div class="sidenav mt-2">
+            <nav class="nav-active-text-primary" data-nav="">
+              <ul class="nav">
+                <li *ngFor="let menu of menus">
+                  <a data-pjax-state=""><span class="nav-text" (click)="selectedWeek(menu)">{{
+                      menu?.pool_Name
+                    }}</span>
+                    <span class="nav-badge"><b class="badge badge-sm badge-pill bg-secondary">{{
+                        menu?.theCount
+                      }}</b></span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex" id="content-body">
+      <div class="d-flex flex-column flex" id="user-list">
+        <div class="p-3">
+          <div class="toolbar">
+            <h5 class="Primary">{{ pooName }}</h5>
+          </div>
+        </div>
+        <div *ngIf="show" class="d-block pl-3 pr-3">
+          <div class="">
+            <div class="scroll-y">
+              <div class="card">
+                <div class="scroll-y">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="nav-active-border b-primary bottom">
+                          <ul class="nav" id="myTab" role="tablist">
+                            <li class="nav-item" *ngFor="let obj of Weeks; let index = index">
+                              <a class="nav-link" id="home-tab" data-toggle="tab" (click)="getNFLDataByWeek(obj)"
+                                role="tab" aria-controls="home" aria-selected="false">Week {{ obj }}</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="adminType == 'SuperAdmin'" class="d-flex flex px-3">
+          <div class="d-flex flex-column flex">
+            <div class="scroll-y">
+              <div class="row">
+                <div class="col-sm-2">
+                  <h5 class="Primary" *ngIf="weekNumber !== 'Week 0'">
+                    {{ weekNumber }}
+                  </h5>
+                </div>
+                <div class="col-sm-2 align-right" *ngIf="weekNumber">
+                  <label style="position: relative; top:4px;">Filter By :</label>
+                </div>
+                <div class="col-sm-2 align-right" *ngIf="weekNumber">
+                  <select *ngIf="weekNumber" class="form-control form-control-sm "
+                    (change)="EntryFilterChange($event.target.value)">
+                    <option>None</option>
+                    <option>Ticket</option>
+                    <option>Pick</option>
+                    <option>Date</option>
+                    <option>Eliminated</option>
+                    <option>Defaulted</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <div class="flex">
+                    <div [style.display]="showTicketTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <input type="text" #ticket class="form-control form-control-sm search"
+                          placeholder="Search by ticket"> <span class="input-group-append"><button
+                            class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                              (click)="filterByTicket(ticket.value)"
+                              class="i-con i-con-search text-muted"></i></button></span></div>
+                    </div>
+                    <div [style.display]="showPickTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <input class="form-control form-control-sm search" placeholder="Search by pick" type="text"
+                          #pick />
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterByPick(pick.value)" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                    <div [style.display]="showDateTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <input class="form-control form-control-sm search" placeholder="Search by date" type="text"
+                          #date />
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterBydate(date.value)" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                    <div [style.display]="showEliminatedTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <!-- <input style="display: none;" class="form-control form-control-sm search" placeholder="Search by eliminated"
+                          type="text" #eliminated /> -->
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterByEliminated('Yes')" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                    <div [style.display]="showDefaultedTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <!-- <input style="display: none;" class="form-control form-control-sm search" placeholder="Search by defaulted" type="text"
+                          #defaulted /> -->
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterByDefaulted('Yes')" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2 pb-3" *ngIf="weekNumber">
+                  <a style="float: right;" class="btn btn-sm btn-warning" (click)="exportTOCSV()">Export to CSV</a>
+                </div>
+              </div>
+              <div class="card">
+                <div class="scroll-y">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table class="table table-theme v-middle">
+                          <thead class="text-muted">
+                            <tr>
+                              <th>
+                                <div (click)="sortPickReportBy('ticket')" [ngClass]="
+                                    filterData.shortByName == 'ticket'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Ticket
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortPickReportBy('pick')" [ngClass]="
+                                    filterData.shortByName == 'pick'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Pick
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortPickReportBy('date')" [ngClass]="
+                                    filterData.shortByName == 'date'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Date
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortPickReportBy('eliminated')" [ngClass]="
+                                    filterData.shortByName == 'eliminated'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Eliminated
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortPickReportBy('defaulted')" [ngClass]="
+                                    filterData.shortByName == 'defaulted'
+                                      ? filterData.isAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                      : ''
+                                  " class="th-inner sortable both">
+                                  Defaulted
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="v-middle" data-id="7" *ngFor="let obj of Reports">
+                              <td>{{ obj.ticket }}</td>
+                              <td>
+                                {{ obj.pick }}
+                              </td>
+                              <td>
+                                {{ obj.date }}
+                              </td>
+                              <td>
+                                {{ obj.eliminated }}
+                              </td>
+                              <td>
+                                {{ obj.defaulted }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======For Group Admin======= -->
+
+        <div *ngIf="adminType == 'GroupAdmin'" class="d-flex flex px-3">
+          <div class="d-flex flex-column flex">
+            <div class="scroll-y">
+              <div class="row">
+                <div class="col-sm-2">
+                  <h5 class="Primary" *ngIf="weekNumber !== 'Week 0'">
+                    {{ weekNumber }}
+                  </h5>
+                </div>
+                <div class="col-sm-2 align-right" *ngIf="weekNumber">
+                  <label style="position: relative; top:4px;">Filter By :</label>
+                </div>
+                <div class="col-sm-2 align-right" *ngIf="weekNumber">
+                  <select *ngIf="weekNumber" class="form-control form-control-sm "
+                    (change)="EntryFilterChange($event.target.value)">
+                    <option>None</option>
+                    <option>Ticket</option>
+                    <option>Pick</option>
+                    <option>Date</option>
+                    <option>Eliminated</option>
+                    <option>Defaulted</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <div class="flex">
+                    <div [style.display]="showTicketTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <input type="text" #ticket class="form-control form-control-sm search"
+                          placeholder="Search by ticket"> <span class="input-group-append"><button
+                            class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                              (click)="filterByTicket(ticket.value)"
+                              class="i-con i-con-search text-muted"></i></button></span></div>
+                    </div>
+                    <div [style.display]="showPickTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <input class="form-control form-control-sm search" placeholder="Search by pick" type="text"
+                          #pick />
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterByPick(pick.value)" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                    <div [style.display]="showDateTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <input class="form-control form-control-sm search" placeholder="Search by date" type="text"
+                          #date />
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterBydate(date.value)" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                    <div [style.display]="showEliminatedTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <!-- <input style="display: none;" class="form-control form-control-sm search" placeholder="Search by eliminated"
+                  type="text" #eliminated /> -->
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterByEliminated('Yes')" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                    <div [style.display]="showDefaultedTextbox ? 'block' : 'none'">
+                      <div class="input-group">
+                        <!-- <input style="display: none;" class="form-control form-control-sm search" placeholder="Search by defaulted" type="text"
+                  #defaulted /> -->
+                        <button class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                            (click)="filterByDefaulted('Yes')" class="i-con i-con-search text-muted"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2 pb-3" *ngIf="weekNumber">
+                  <a style="float: right;" class="btn btn-sm btn-warning" (click)="exportTOCSV()">Export to CSV</a>
+                </div>
+              </div>
+              <div class="card">
+                <div class="scroll-y">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table class="table table-theme v-middle">
+                          <thead class="text-muted">
+                            <tr>
+                              <th>
+                                <div (click)="sortPickReportBy('ticket')" [ngClass]="
+                            filterData.shortByName == 'ticket'
+                              ? filterData.isAscending
+                                ? 'asc'
+                                : 'desc'
+                              : ''
+                          " class="th-inner sortable both">
+                                  Ticket
+                                </div>
+                              </th>
+                              <th  *ngIf="showPicks">
+                                <div (click)="sortPickReportBy('pick')" [ngClass]="
+                            filterData.shortByName == 'pick'
+                              ? filterData.isAscending
+                                ? 'asc'
+                                : 'desc'
+                              : ''
+                          " class="th-inner sortable both">
+                                  Pick
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortPickReportBy('date')" [ngClass]="
+                            filterData.shortByName == 'date'
+                              ? filterData.isAscending
+                                ? 'asc'
+                                : 'desc'
+                              : ''
+                          " class="th-inner sortable both">
+                                  Date
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortPickReportBy('eliminated')" [ngClass]="
+                            filterData.shortByName == 'eliminated'
+                              ? filterData.isAscending
+                                ? 'asc'
+                                : 'desc'
+                              : ''
+                          " class="th-inner sortable both">
+                                  Eliminated
+                                </div>
+                              </th>
+                              <th>
+                                <div (click)="sortPickReportBy('defaulted')" [ngClass]="
+                            filterData.shortByName == 'defaulted'
+                              ? filterData.isAscending
+                                ? 'asc'
+                                : 'desc'
+                              : ''
+                          " class="th-inner sortable both">
+                                  Defaulted
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="v-middle" data-id="7" *ngFor="let obj of Reports">
+                              <td>{{ obj.ticket }}</td>
+                              <td *ngIf="showPicks">
+                                {{ obj.pick }}
+                              </td>
+                              <td>
+                                {{ obj.date }}
+                              </td>
+                              <td>
+                                {{ obj.eliminated }}
+                              </td>
+                              <td>
+                                {{ obj.defaulted }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

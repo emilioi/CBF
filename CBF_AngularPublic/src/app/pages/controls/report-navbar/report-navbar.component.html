@@ -1,0 +1,25 @@
+
+<!-- <div class="row pt-3 top-navigation-bar">
+    <div class="col-sm-12 ">
+        <a style="float: left;" (click)="BackToClubs()" class=" text-uppercase" title="Back to Club">
+            <span class="back-icon">
+                <i style="float: left;" class="mr-2 i-con i-con-left left"></i>BACK</span>
+        </a>
+        <span class="center">{{PoolName}}</span>
+       
+    </div>
+</div> -->
+<div class="row pt-3 top-navigation-bar">
+    <div class="col-4 center">
+        <button (click)="viewTickets()" [ngClass]="PageName == 'tickets'? 'btn-top-toolbar' : 'btn-top-toolbar-outline'" class="btn   mb-1  center ">VIEW
+            TICKETS</button>
+    </div>
+    <div class="col-4  center">
+        <button (click)="pickAnalysis()"  [ngClass]="PageName == 'pick-analysis'? 'btn-top-toolbar' : 'btn-top-toolbar-outline'"  class="btn   mb-1  center  ">PICKS</button>
+    </div>
+    <div class="col-4  center">
+        <button  (click)="viewDefaults()"  [ngClass]="PageName == 'default-picks'? 'btn-top-toolbar' : 'btn-top-toolbar-outline'"  class="btn   mb-1  center ">VIEW
+            DEFAULTS</button>
+    </div>
+<!-- {{PageName}} -->
+</div>

@@ -1,0 +1,99 @@
+.table-theme tbody td span {
+  background-color: #fff;
+  border-width: 0;
+  padding: 10px 10px;
+  display: block;
+  box-shadow: 0px 0px 32px #8898aa26;
+  border-radius: 4px;
+  height: 40px;
+  font: Bold 15px/18px Google Sans;
+  letter-spacing: 0;
+
+  opacity: 1;
+}
+
+.table-theme tbody td {
+  background-color: transparent !important;
+  border-width: 0;
+  padding: 5px !important;
+  box-shadow: none !important;
+}
+.table-center {
+  margin: 0 auto;
+  overflow-x: scroll;
+}
+.h-center td {
+  text-align: center;
+}
+.color-green {
+  color: rgb(0, 0, 0) !important;
+
+  font-weight: bold;
+}
+.color-green span {
+  background: #39be4032 !important;
+}
+.color-orange span {
+  color: #ffb111 !important;
+}
+.back-icon i {
+  position: relative;
+  right: -10px;
+  top: 1px;
+}
+
+.pick-analysis thead tr th {
+  height: 19px;
+  text-align: left;
+  font: Bold 15px/18px Google Sans;
+  letter-spacing: 0;
+  color: #32325d;
+  opacity: 1;
+}
+
+.btn-top-toolbar {
+  width: 177px;
+  height: 40px;
+  background: #39be4032 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 32px #8898aa26;
+  border-radius: 4px;
+  opacity: 1;
+
+  text-align: left;
+  font: Bold 16px/19px Google Sans;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+}
+.btn-top-toolbar-outline {
+  width: 179px;
+  height: 40px;
+  background: #fcfdfc 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 32px #8898aa26;
+  border-radius: 4px;
+  opacity: 1;
+
+  font: Bold 16px/19px Google Sans;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+}
+
+@media (max-width: 360px) {
+  .btn-top-toolbar-outline,
+  .btn-top-toolbar {
+    width: 100%;
+    font-size: 8px;
+  }
+}
+
+.search-bar {
+  float: right;
+}
+
+@media (max-width: 670px) {
+  .search-bar {
+    float: none;
+    padding-top: 5px;
+  }
+}

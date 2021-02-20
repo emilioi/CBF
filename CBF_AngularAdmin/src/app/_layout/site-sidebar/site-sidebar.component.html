@@ -1,0 +1,226 @@
+<div id="aside" class="page-sidenav no-shrink nav-expand animate fadeInLeft fade bg-white sticky" aria-hidden="true"
+	data-class="bg-white">
+	<div class="sidenav h-100 modal-dialog bg-white box-shadow">
+		<!-- sidenav top -->
+		<!-- Flex nav content -->
+		<div class="flex scrollable hover">
+			<div class="nav-border b-primary" data-nav="">
+				<ul class="nav bg">
+					<li class="nav-header hidden-folded">
+						<span>Main</span>
+					</li>
+					<li class="active" *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/dashboard']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-home"><i></i></i>
+							</span>
+							<span class="nav-text">Dashboard</span>
+						</a>
+					</li>
+					<li class="" *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/administrator-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-lock"><i></i></i>
+							</span>
+							<span class="nav-text">Administrator</span>
+						</a>
+					</li>
+					<li class="" *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/member-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-user"><i></i></i>
+							</span>
+							<span class="nav-text">Members</span>
+						</a>
+					</li>
+					<li class="" *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/alert-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-bell"><i></i></i>
+							</span>
+							<span class="nav-text">Member Alerts</span>
+						</a>
+					</li>
+					<li class="" *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/email-templates']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-file"><i></i></i>
+							</span>
+							<span class="nav-text">Email Templates</span>
+						</a>
+					</li>
+					<li class="" *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/mailing-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-file"><i></i></i>
+							</span>
+							<span class="nav-text">Mailing List</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()' class="nav-header hidden-folded">
+						<span>Sports</span>
+					</li>
+
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/sport-type-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-list"><i></i></i>
+							</span>
+							<span class="nav-text">Sport Types</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/team-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-users"><i></i></i>
+							</span>
+							<span class="nav-text">Team List</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/pool-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-eye"><i></i></i>
+							</span>
+							<span class="nav-text">Pools</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/week-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-circle"><i></i></i>
+							</span>
+							<span class="nav-text">Weeks</span>
+						</a>
+					</li>
+
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/schedule-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-calendar"><i></i></i>
+							</span>
+							<span class="nav-text">Schedule List</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/main-schedule-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-calendar"><i></i></i>
+							</span>
+							<span class="nav-text">Main Schedule</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/entry-list']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-grid"><i></i></i>
+							</span>
+							<span class="nav-text">Entries</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck()'>
+						<a [routerLink]="['/entries-by-referral']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-grid"><i></i></i>
+							</span>
+							<span class="nav-text">Entries By Referral</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/Set-Weekly-defaults']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-table"><i></i></i>
+							</span>
+							<span class="nav-text">Set Weekly defaults</span>
+						</a>
+					</li>
+
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/entries-without-picks']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-layer"><i></i></i>
+							</span>
+							<span class="nav-text">Active entries without picks</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/move-ticket']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-page"><i></i></i>
+							</span>
+							<span class="nav-text">Move a Ticket</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/default-report']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-pie-chart"><i></i></i>
+							</span>
+							<span class="nav-text">Defaulted report</span>
+						</a>
+					</li>
+
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()' class="nav-header hidden-folded">
+						<span>Reports</span>
+					</li>
+
+					<li *ngIf='PermissionCheck()'>
+						<a [routerLink]="['/pick-report']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-pie-chart"><i></i></i>
+							</span>
+							<span class="nav-text">Picks report</span>
+						</a>
+					</li>
+
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()' class="nav-header hidden-folded">
+						<span>Developers Options</span>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/game-rules']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-help"><i></i></i>
+							</span>
+							<span class="nav-text">Game Rules</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/dev-control']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-share"><i></i></i>
+							</span>
+							<span class="nav-text">Dev Control</span>
+						</a>
+					</li>
+					<li *ngIf='PermissionCheck() && PermissionCheckGroupAdmin()'>
+						<a [routerLink]="['/system-error']" class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class="i-con i-con-warning"><i></i></i>
+							</span>
+							<span class="nav-text">System Error</span>
+						</a>
+					</li>
+				</ul>
+				<div class="pt-5">
+
+				</div>
+				<div class="pt-5">
+
+				</div>
+			</div>
+		</div>
+
+		<!-- sidenav bottom -->
+		<!-- <div class="no-shrink footer-fixed-ui">
+			<div class="text-sm p-3 b-t">
+				<div class="hidden-folded text-sm">
+					<div class="mt-1">
+						<a href="index.html" class="text-muted" data-pjax-state="">About</a>
+						<a href="../docs/" class="text-muted mx-2 no-ajax" target="_blank">Documentation</a>
+					</div>
+					<div class="text-muted"><small class="text-muted">© Copyright 2019, CBF</small></div>
+				</div>
+			</div>
+		</div>   -->
+	</div>
+</div>

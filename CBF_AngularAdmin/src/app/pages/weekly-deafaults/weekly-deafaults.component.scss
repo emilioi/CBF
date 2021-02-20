@@ -1,0 +1,63 @@
+.credits{padding-top:1rem}
+
+.nav-tabs{margin-bottom:0}
+
+.content{padding:25px}
+
+.sortable-list-item{padding:5px}
+
+.sortable-container{width:100%;border:1px solid #d9d9d9;border-radius:3px}
+.sortable-container   .sortable-header{width:auto;padding:5px;background:lightgray;border-bottom:1px solid #d9d9d9;height:30px;background-image:linear-gradient(#f6f7f9 0%, #ebedf0 100%);box-sizing:content-box;color:black}
+.sortable-container   .sortable-header   .sortable-name{vertical-align:middle;font-size:25px}
+.sortable-container   .sortable-header   .sortable-buttons{float:right;height:100%;box-sizing:border-box}
+.sortable-container   .sortable-header   .sortable-buttons   button{height:30px;width:30px;vertical-align:middle;display:inline-block;box-sizing:border-box;margin-left:5px;border:1px solid #2399e5;color:#FFFFFF;background:#2399e5;-webkit-transition:background-color .2s;-moz-transition:background-color .2s;transition:background-color .2s;border-radius:5px;outline:none}
+.sortable-container   .sortable-header   .sortable-buttons   button:disabled{cursor:not-allowed}
+.sortable-container   .sortable-header   .sortable-buttons   button:active, .sortable-container   .sortable-header   .sortable-buttons   button:hover{border:1px solid #156090;background:#186ba0;color:#ffffff}
+.sortable-container   .sortable-header   .sortable-buttons   button:active:enabled, .sortable-container   .sortable-header   .sortable-buttons   button:hover:enabled{cursor:pointer}.sortable-container   .sortable-list{list-style-type:none;margin:0;padding:0px;overflow:auto}
+.sortable-container   .sortable-list   .drop-zone{height:30px;background:rgba(225,219,250,0.5);opacity:0.5px;border:2px dotted #e1dbfa}
+.sortable-container   .sortable-list   .active{background:#3f94e9 !important;color:white}
+
+.Home-Team {
+   
+    // padding: 10px;
+    text-align: center !important;
+}
+.Visiting-Team {
+   
+    text-align: center !important;
+    // padding: 10px;
+}
+.Home-Team img{
+    width: 40px;
+    
+}
+.Visiting-Team img{
+    width: 40px;
+    
+}
+.versus{
+    float: left;
+    padding: 5px;
+    text-align: center !important;
+}
+.versus h6{
+    line-height: 35px;
+}
+.b-1{
+    
+    width: 180px;
+    margin: 0 auto;
+    padding: 10px;
+}
+.team-name
+{
+    text-align: center !important;
+    display: block;
+    
+    
+}
+.match-hover{
+    border: 1px solid #ddd;
+    overflow: hidden;
+    margin: 0px 10px;
+}
